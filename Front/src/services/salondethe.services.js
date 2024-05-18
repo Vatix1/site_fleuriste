@@ -1,25 +1,16 @@
-import { getRequest, postRequest } from "./axios.services";
+import { getRequest, postRequest, deleteRequest, patchRequest } from "./axios.services";
 
-async function getCarteFromAPI(){
-    return getRequest('/salon-de-the/getCarte','getCarte')
+async function getAllArticleFromAPI(){
+    return getRequest('/salondethe/getAllArticle','getAllArticle')
 }
 
-async function getCarte(){
-    let anwser = await getCarteFromAPI();
-    return anwser.data;
-}
-
-async function getArticleFromAPI(){
-    return getRequest('/salon-de-the/getArticle','getArticle')
-}
-
-async function getArticle(){
-    let anwser = await getArticleFromAPI();
+async function getAllArticle(){
+    let anwser = await getAllArticleFromAPI();
     return anwser.data;
 }
 
 async function deleteArticleFromAPI(id){
-    return deleteRequest('/salon-de-the/deleteArticle?id='+id, 'deleteArticle')
+    return deleteRequest('/salondethe/deleteArticle?id='+id, 'deleteArticle')
 }
 
 async function deleteArticle(id){
@@ -28,7 +19,7 @@ async function deleteArticle(id){
 }
 
 async function addArticleFromAPI(data){
-    return postRequest('/salon-de-the/addArticle',data,'addArticle')
+    return postRequest('/salondethe/addArticle',data,'addArticle')
 }
 
 async function addArticle(data){
@@ -37,7 +28,7 @@ async function addArticle(data){
 }
 
 async function updateArticleFromAPI(data){
-    return patchRequest('/salon-de-the/updateArticle',data,'updateArticle')
+    return patchRequest('/salondethe/updateArticle',data,'updateArticle')
 }
 
 async function updateArticle(data){
@@ -46,8 +37,7 @@ async function updateArticle(data){
 }
 
 export {
-    getCarte,
-    getArticle,
+    getAllArticle,
     deleteArticle,
     updateArticle,
     addArticle

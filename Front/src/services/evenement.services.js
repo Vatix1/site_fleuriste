@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "./axios.services";
+import { getRequest, postRequest, deleteRequest,patchRequest } from "./axios.services";
 
 async function getAllEvenementFromAPI(){
     return getRequest('/evenement/getAllEvenement', 'getAllEvenement')
