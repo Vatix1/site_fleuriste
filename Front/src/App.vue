@@ -43,8 +43,8 @@ export default {
         this.router.push({name: 'bouquet'});
       } else if (index === 1 && current !== 'galerie') {
         this.router.push({name: 'galerie'});
-      } else if (index === 2 && current !== 'salon-de-the') {
-        this.router.push({name: 'salon-de-the'});
+      } else if (index === 2 && current !== 'salondethe') {
+        this.router.push({name: 'salondethe'});
       } else if (index === 3 && current !== 'evenement') {
         this.router.push({name: 'evenement'});
       } else if (index === 4 && current !== 'cadeau') {

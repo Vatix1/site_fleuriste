@@ -9,18 +9,26 @@
   },
   "dependencies": {
     "18": "^0.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@vue/compiler-sfc": "^3.4.24",
     "axios": "^1.6.8",
+    "bootstrap": "^4.6.2",
     "core-js": "^3.8.3",
     "express": "^4.19.2",
+    "jquery": "^3.7.1",
     "mysql": "^2.18.1",
     "node": "^18.20.2",
     "nodemon": "^3.1.0",
+    "popper.js": "^1.16.1",
+    "vee-validate": "^4.12.8",
     "vite": "^5.2.10",
     "vue": "^3.4.24",
     "vue-cli": "^2.9.6",
     "vue-router": "^4.3.2",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

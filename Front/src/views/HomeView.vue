@@ -24,10 +24,10 @@
         </div>  
       </div> 
     </div>
+    <button>bouquet</button>
     <button>salon de the</button>
     <button>galerie</button>
     <button>cadeau</button>
-    <button>instagram</button>
   </div>
 </template>
 

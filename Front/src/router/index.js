@@ -5,7 +5,13 @@ import GalerieView from '../views/GalerieView.vue';
 import SalonDeTheView from '../views/SalonDeTheView.vue';
 import EvenementView from '../views/EvenementView.vue';
 import CadeauView from '../views/CadeauView.vue';
-import LoginView from '../views/LoginView.vue';
+//import LoginView from '../views/LoginView.vue';
+
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
+const Profile = () => import('../components/Profile.vue')
+const BoardUser = () => import('../components/BoardUser.vue')
+const BoardAdmin = () => import('../components/BoardAdmin.vue')
 
 const routes = [
   {
@@ -24,8 +30,8 @@ const routes = [
     component: GalerieView,
   },
   {
-    path: '/salon-de-the',
-    name: 'salon-de-the',
+    path: '/salondethe',
+    name: 'salondethe',
     component: SalonDeTheView,
   },
   {
@@ -41,13 +47,45 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginView,
+    component: Login,
   },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: BoardAdmin,
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: BoardUser,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+  }
+
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to,from,next) => {
+  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+  if(authRequired && !loggedIn){
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;
