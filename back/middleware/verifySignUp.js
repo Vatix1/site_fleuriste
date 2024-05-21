@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const db = require("../models")
 const User = db.user;
 const ROLES = db.ROLES;
@@ -7,7 +6,7 @@ checkDuplicateUsernameOrEmail = (req,res,next) => {
     // Username
     User.findOne({
         where: {
-            username: req.body.username
+            nom_utilisateur: req.body.nom_utilisateur
         }
     }).then(user => {
         if(user) {

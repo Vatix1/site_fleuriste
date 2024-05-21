@@ -1,13 +1,12 @@
-import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/auth';
+import { postRequest } from "./axios.services"
 
 class AuthService {
     login(user) {
-        return axios
-        .post(API_URL + 'signin',{
-            username: user.username,
-            password: user.password
+        console.log('pass', user);
+        return postRequest( 'auth/signin',{
+            nom_utilisateur: user.nom_utilisateur,
+            mot_de_passe: user.mot_de_passe
         })
         .then(response => {
             if(response.data.accesToken){
@@ -22,12 +21,39 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + 'signup', {
-            username: user.username,
+        return postRequest('auth/signup', {
+            nom_utilisateur: user.nom_utilisateur,
             email: user.email,
-            password: user.password
+            mot_de_passe: user.mot_de_passe
         });
     }
 }
 
 export default new AuthService();
+
+
+
+/*
+async function loginFromAPI(data) {
+    return postRequest('/auth/signin', data, 'signin')
+}
+
+async function login(data){
+    let anwser = await loginFromAPI(data)
+    return anwser;
+}
+
+async function registerFromAPI(data) {
+    return postRequest('/auth/signup', data, 'signup')
+}
+
+async function register(data){
+    let anwser = await registerFromAPI(data)
+    return anwser;
+}
+
+export {
+    login,
+    register,
+}
+*/

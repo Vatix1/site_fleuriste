@@ -1,26 +1,94 @@
-const { verifySignUp } = require("../middleware")
-const authController = require("../controllers/auth.controller")
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/auth.controller');
+const { verifySignUp } = require('../middleware');
 
-module.exports = function(app) {
-    app.use(function(req, res, next) {
-        res.header(
-            "Access-Control-Allow-Headers",
-            "x-access-token, Origin, Content-Type, Accept"
-        );
-        next();
-    });
-    
-    app.post(
-        "/api/auth/signup",
-        [
-            verifySignUp.checkDuplicateUsernameOrEmail,
-            verifySignUp.checkRolesExisted
-        ],
-        authController.signup
-    );
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication API
+ */
 
-    app.post(
-        "/api/auth/signin", authController.signin
-    );
-};
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ */
+
+/**
+ * @swagger
+ * /auth/signup:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Create a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal error
+ */
+router.post(
+    "/signup",
+    [
+        verifySignUp.checkDuplicateUsernameOrEmail,
+        verifySignUp.checkRolesExisted
+    ],
+    authController.signup
+);
+
+/**
+ * @swagger
+ * /auth/signin:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Sign in to get a JWT token
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal error
+ */
+router.post("/signin", authController.signin);
+
+module.exports = router;
 

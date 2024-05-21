@@ -10,9 +10,9 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
     User.create({
-        username: req.body.username,
+        nom_utilisateur: req.body.nom_utilisateur,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 8)
+        mot_de_passe: bcrypt.hashSync(req.body.mot_de_passe, 8)
     })
     .then(user => {
         if (req.body.roles) {
@@ -41,7 +41,7 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
     User.findOne({
         where: {
-            username: req.body.username
+            nom_utilisateur: req.body.nom_utilisateur
         }
     })
     .then(user => {
@@ -50,8 +50,8 @@ exports.signin = (req, res) => {
         }
 
         var passwordIsValid = bcrypt.compareSync(
-            req.body.password,
-            user.password
+            req.body.mot_de_passe,
+            user.mot_de_passe
         );
         if (!passwordIsValid) {
             return res.status(401).send({
@@ -74,7 +74,7 @@ exports.signin = (req, res) => {
             }
             res.status(200).send({
                 id: user.id,
-                username: user.username,
+                nom_utilisateur: user.nom_utilisateur,
                 email: user.email,
                 roles: authorities,
                 accessToken: token

@@ -3,10 +3,15 @@ DROP TABLE IF EXISTS utilisateur, evenements, bougie, the,article, bouquet, form
 CREATE TABLE utilisateur(
    id_utilisateur SERIAL,
    nom_utilisateur VARCHAR(50),
-   id_role INT,
    mot_de_passe VARCHAR(50),
    email VARCHAR(150),
    PRIMARY KEY(id_utilisateur)
+);
+
+CREATE TABLE roles (
+   id_role SERIAL,
+   nom_role VARCHAR(50),
+   PRIMARY KEY(id_role)
 );
 
 CREATE TABLE evenements(
@@ -59,6 +64,11 @@ CREATE TABLE formule(
 INSERT INTO utilisateur (nom_utilisateur, mot_de_passe) VALUES
    ('JeanDupont', 'password1'),
    ('MarieDurand', 'password2');
+
+INSERT INTO roles (nom_role) VALUES
+   ('user'),
+   ('moderator')
+   ('admin')
 
 INSERT INTO evenements (nom_evenement) VALUES
    ('Anniversaire'),

@@ -4,7 +4,8 @@ const bouquetRoutes = require('./routes/bouquet.router')
 const cadeauRoutes = require('./routes/cadeau.router')
 const evenementRoutes = require('./routes/evenement.router')
 const salondetheRoutes = require('./routes/salondethe.router')
-const userRoutes = require('./routes/users.router')
+//const userRoutes = require('./routes/users.router')
+const authRoutes = require('./routes/auth.routes')
 
 dotenv.config();
 const app = express();
@@ -66,7 +67,7 @@ app.use("/bouquet", bouquetRoutes);
 app.use("/cadeau", cadeauRoutes);
 app.use("/evenement", evenementRoutes)
 app.use("/salondethe", salondetheRoutes)
-app.use("/auth", userRoutes)
+app.use("/auth", authRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
