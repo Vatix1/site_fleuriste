@@ -1,4 +1,7 @@
-DROP TABLE IF EXISTS utilisateur, evenements, bougie, the,article, bouquet, formule;
+-- DROP TABLE IF EXISTS utilisateur,roles, evenements,user_role, bougie, the,article, bouquet, formule;
+DROP TABLE IF EXISTS formule, bouquet, article, the,bougie , user_role, evenements, roles, utilisateur;
+
+-- DROP TABLE IF EXISTS roles CASCADE ;
 
 CREATE TABLE utilisateur(
    id_utilisateur SERIAL,
@@ -18,6 +21,14 @@ CREATE TABLE evenements(
    id_evenement SERIAL,
    nom_evenement VARCHAR(50),
    PRIMARY KEY(id_evenement)
+);
+
+CREATE TABLE user_role(
+   id_utilisateur INT,
+   id_role INT,
+   PRIMARY KEY (id_utilisateur, id_role),
+   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
+   FOREIGN KEY (id_role) REFERENCES roles(id_role)
 );
 
 CREATE TABLE bougie(
@@ -55,7 +66,7 @@ CREATE TABLE formule(
    id_the INT,
    id_bouquet INT,
    PRIMARY KEY(id_formule),
-    FOREIGN KEY(id_bouquet) REFERENCES bouquet(id_bouquet),
+   FOREIGN KEY(id_bouquet) REFERENCES bouquet(id_bouquet),
    FOREIGN KEY(id_bougie) REFERENCES bougie(id_bougie),
    FOREIGN KEY(id_the) REFERENCES the(id_the)
 
@@ -67,8 +78,8 @@ INSERT INTO utilisateur (nom_utilisateur, mot_de_passe) VALUES
 
 INSERT INTO roles (nom_role) VALUES
    ('user'),
-   ('moderator')
-   ('admin')
+   ('moderator'),
+   ('admin');
 
 INSERT INTO evenements (nom_evenement) VALUES
    ('Anniversaire'),
@@ -93,4 +104,3 @@ INSERT INTO bouquet (nom_bouquet, prix_bouquet) VALUES
 INSERT INTO formule (nom_formule, prix_formule, id_bouquet, id_bougie, id_the) VALUES
    ('Formule Anniversaire', 50.97, 1, 1, 1),
    ('Formule Mariage', 60.96, 2, 2, 2);
-

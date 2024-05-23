@@ -10,10 +10,6 @@
             {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
         </p>
         <p>
-            <strong>Id:</strong>
-            {{currentUser.id}}
-        </p>
-        <p>
             <strong>Email:</strong>
             {{currentUser.email}}
         </p>
@@ -21,12 +17,30 @@
         <ul>
             <li v-for="role in currentUser.roles" :key="role">{{ role }}</li>
         </ul>
+        <div v-if="currentUser.roles.includes('ROLE_USER')">
+            <BoardUser/>
+        </div>
+        <div v-else-if="currentUser.roles.includes('ROLE_MODERATOR')">
+            <BoardModerator/>
+        </div>
+        <div v-else-if="currentUser.roles.includes('ROLE_ADMIN')">
+            <BoardAdmin/>
+        </div>
     </div>
 </template>
 
 <script>
+import BoardUser from './BoardUser';
+import BoardModerator from './BoardModerator';
+import BoardAdmin from './BoardAdmin';
+
 export default {
     name: 'ProfilePage',
+    components: {
+        BoardUser,
+        BoardModerator,
+        BoardAdmin
+    },
     computed: {
         currentUser() {
             return this.$store.state.auth.user;

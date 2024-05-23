@@ -15,26 +15,26 @@ export{
 }
 */
 
-import axios from "axios";
+import { getRequest } from './axios.services'
 import authHeader from "./auth-header";
 
-const API_URL = 'http://localhost:8080/api/test';
+
 
 class UserService {
     getPublicContent() {
-        return axios.get(API_URL + 'all');
+        return getRequest('/user/getAllUsers');
     }
 
     getUserProfile() {
-        return axios.get(API_URL + 'user', { headers: authHeader() });
+        return getRequest( '/user/getProfileUser', { headers: authHeader() });
     }
 
     getModProfile() {
-        return axios.get(API_URL + 'mod', { headers: authHeader() });
+        return getRequest( '/user/getProfileMod', { headers: authHeader() });
     }
 
     getAdminProfile() {
-        return axios.get(API_URL + 'admin', {headers: authHeader() });
+        return getRequest( '/user/getProfileAdmin', {headers: authHeader() });
     }
 }
 

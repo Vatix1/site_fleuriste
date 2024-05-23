@@ -8,12 +8,12 @@
                 />
             <Form @submit="handleLogin" :validation-schema="schema">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Nom d'utilisateur</label>
                     <Field name="username" type="text" class="form-control" />
                     <ErrorMessage name="username" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Mot de Passe</label>
                     <Field name="password" type="password" class="form-control" />
                     <ErrorMessage name="password" class="error-feedback" />
                 </div>
