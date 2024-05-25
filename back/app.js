@@ -13,9 +13,6 @@ const cors = require('cors')
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 
-const db = require("./models")
-db.sequelize.sync();
-
 /*
 const Role = db.role;
 db.sequelize.sync({force: true}).then(() => {

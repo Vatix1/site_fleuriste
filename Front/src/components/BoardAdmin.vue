@@ -13,14 +13,17 @@
 
 <script>
 import UserService from "../services/users.services";
+/*
 import PanneauBouquet from "./PanneauBouquet.vue";
 import PanneauCadeau from "./PanneauCadeau.vue";
 import PanneauEvenement from "./PanneauEvenement.vue";
 import PanneauSdT from "./PanneauSdT.vue";
 import PanneauUtilisateur from "./PanneauUtilisateur.vue"
+*/
 
 export default {
   name: "BoardAdmin",
+  /*
   components: {
     PanneauBouquet,
     PanneauCadeau,
@@ -65,6 +68,7 @@ export default {
       ]
     };
   },
+  */
   mounted() {
     UserService.getAdminBoard().then(
       (response) => {

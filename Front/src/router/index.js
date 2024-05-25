@@ -9,6 +9,7 @@ import CadeauView from '../views/CadeauView.vue';
 
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import PanneauBouquet from '@/components/PanneauBouquet.vue';
 const Profile = () => import('../components/Profile.vue')
 const BoardUser = () => import('../components/BoardUser.vue')
 const BoardAdmin = () => import('../components/BoardAdmin.vue')
@@ -68,6 +69,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile,
+  },
+  {
+    path: '/panneau',
+    name: 'panneau',
+    component: PanneauBouquet
   }
 
 ];
@@ -78,7 +84,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from,next) => {
-  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau'];
+  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneau'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   if(authRequired && !loggedIn){

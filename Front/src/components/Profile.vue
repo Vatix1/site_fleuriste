@@ -21,7 +21,7 @@
             <BoardUser/>
         </div>
         <div v-else-if="currentUser.roles.includes('ROLE_MODERATOR')">
-            <BoardModerator/>
+            <BoardMod/>
         </div>
         <div v-else-if="currentUser.roles.includes('ROLE_ADMIN')">
             <BoardAdmin/>
@@ -31,14 +31,14 @@
 
 <script>
 import BoardUser from './BoardUser';
-import BoardModerator from './BoardModerator';
+import BoardMod from './BoardMod';
 import BoardAdmin from './BoardAdmin';
 
 export default {
     name: 'ProfilePage',
     components: {
         BoardUser,
-        BoardModerator,
+        BoardMod,
         BoardAdmin
     },
     computed: {
