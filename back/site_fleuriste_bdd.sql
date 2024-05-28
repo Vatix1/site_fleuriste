@@ -1,5 +1,5 @@
 -- DROP TABLE IF EXISTS utilisateur,roles, evenements,user_role, bougie, the,article, bouquet, formule;
-DROP TABLE IF EXISTS formule, bouquet, article, the,bougie , user_role, evenements, roles, utilisateur;
+DROP TABLE IF EXISTS formule, bouquet,type_article, article, the,bougie , user_role,photo_evenement, evenements, roles, utilisateur;
 
 -- DROP TABLE IF EXISTS roles CASCADE ;
 
@@ -8,7 +8,9 @@ CREATE TABLE utilisateur(
    nom_utilisateur VARCHAR(50),
    mot_de_passe VARCHAR(50),
    email VARCHAR(150),
-   PRIMARY KEY(id_utilisateur)
+   id_role INT,
+   PRIMARY KEY(id_utilisateur),
+   FOREIGN KEY(id_role) REFERENCES roles(id_role)
 );
 
 CREATE TABLE roles (
@@ -23,31 +25,43 @@ CREATE TABLE evenements(
    PRIMARY KEY(id_evenement)
 );
 
-CREATE TABLE user_role(
-   id_utilisateur INT,
-   id_role INT,
-   PRIMARY KEY (id_utilisateur, id_role),
-   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
-   FOREIGN KEY (id_role) REFERENCES roles(id_role)
+CREATE TABLE photo_evenements (
+   id_photo SERIAL,
+   photo_evenement VARCHAR(250),
+   id_evenement INT,
+   PRIMARY KEY(id_photo),
+   FOREIGN KEY(id_evenement) REFERENCES evenements(id_evenement)
 );
+
 
 CREATE TABLE bougie(
    id_bougie SERIAL,
    nom_bougie VARCHAR(50),
    prix_bougie NUMERIC(15,2),
+   image_bougie VARCHAR(250),
    PRIMARY KEY(id_bougie)
 );
 
 CREATE TABLE article(
    id_article SERIAL,
    nom_article VARCHAR(50),
-   prix_article NUMERIC(15,2)
+   prix_article NUMERIC(15,2),
+   id_type_article INT,
+   PRIMARY KEY(id_article),
+   FOREIGN KEY (id_type_article) REFERENCES type_article(id_type_article)
+);
+
+CREATE TABLE type_article(
+   id_type_article SERIAL,
+   nom_type_article VARCHAR(50),
+   PRIMARY KEY(id_type_article)
 );
 
 CREATE TABLE the(
    id_the SERIAL,
    nom_the VARCHAR(50),
    prix_the NUMERIC(15,2),
+   image_the VARCHAR(250),
    PRIMARY KEY(id_the)
 );
 
@@ -55,6 +69,8 @@ CREATE TABLE bouquet(
    id_bouquet SERIAL,
    nom_bouquet VARCHAR(50),
    prix_bouquet NUMERIC(15,2),
+   description VARCHAR(250),
+   image_bouquet VARCHAR(250),
    PRIMARY KEY(id_bouquet)
 );
 
@@ -104,3 +120,4 @@ INSERT INTO bouquet (nom_bouquet, prix_bouquet) VALUES
 INSERT INTO formule (nom_formule, prix_formule, id_bouquet, id_bougie, id_the) VALUES
    ('Formule Anniversaire', 50.97, 1, 1, 1),
    ('Formule Mariage', 60.96, 2, 2, 2);
+

@@ -18,12 +18,13 @@ async function deleteBouquet(id){
     return anwser;
 }
 
-async function addBouqueutFromAPI(data){
-    return postRequest('/bouquets/addBouquet',data,'addBouquet')
+async function createBouqueutFromAPI(data){
+    console.log("pass",data);
+    return postRequest('/bouquets/createBouquet',data,'createBouquet')
 }
 
-async function addBouquet(data){
-    let anwser = await addBouqueutFromAPI(data)
+async function createBouquet(data){
+    let anwser = await createBouqueutFromAPI(data)
     return anwser;
 }
 
@@ -39,6 +40,6 @@ async function updateBouquet(data){
 export {
     getAllBouquet,
     deleteBouquet,
-    addBouquet,
+    createBouquet,
     updateBouquet,
 }

@@ -21,10 +21,10 @@ const getAllBouquet = (callback) => {
     });
 }
 
-async function createBouquetAsync (nom_bouquet,prix_bouquet) {
+async function createBouquetAsync (nom_bouquet,prix_bouquet,description,image_bouquet) {
     try {
         const conn = await pool.connect();
-        await conn.query("INSERT INTO bouquet (nom_bouquet, prix_bouquet) VALUES ($1,$2);",[nom_bouquet,prix_bouquet]);
+        await conn.query("INSERT INTO bouquet (nom_bouquet, prix_bouquet, description, image_bouquet) VALUES ($1,$2,$3,$4);",[nom_bouquet,prix_bouquet,description,image_bouquet]);
         conn.release();
     } catch (error) {
         console.error('Error in createBouquetAsync : ',error);
@@ -32,8 +32,8 @@ async function createBouquetAsync (nom_bouquet,prix_bouquet) {
     }
 }
 
-const createBouquet = (nom_bouquet,prix_bouquet,callback) => {
-    createBouquetAsync(nom_bouquet,prix_bouquet).then(res => {
+const createBouquet = (nom_bouquet,prix_bouquet,description,image_bouquet,callback) => {
+    createBouquetAsync(nom_bouquet,prix_bouquet,description,image_bouquet).then(res => {
         callback(null,res)
     }).catch(error => {
         console.log(error);

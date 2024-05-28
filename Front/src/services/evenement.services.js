@@ -18,12 +18,12 @@ async function deleteEvenement(id){
     return anwser;
 }
 
-async function addEvenementFromAPI(data){
-    return postRequest('/evenement/addEvenement',data,'addEvenement')
+async function createEvenementFromAPI(data){
+    return postRequest('/evenement/createEvenement',data,'createEvenement')
 }
 
-async function addEvenement(data){
-    let anwser = await addEvenementFromAPI(data)
+async function createEvenement(data){
+    let anwser = await createEvenementFromAPI(data)
     return anwser;
 }
 
@@ -36,9 +36,50 @@ async function updateEvenement(data){
     return anwser;
 }
 
+async function getAllPhotoFromAPI(){
+    return getRequest('/evenement/getAllEvenement', 'getAllEvenement')
+}
+
+async function getAllPhoto(){
+    let anwser = await getAllPhotoFromAPI();
+    return  anwser.data;
+}
+
+async function deletePhotoFromAPI(id){
+    return deleteRequest('/evenement/deleteEvenement?id='+id, 'deleteEvenement')
+}
+
+async function deletePhoto(id){
+    let anwser = await deletePhotoFromAPI(id)
+    return anwser;
+}
+
+async function createPhotoFromAPI(data){
+    return postRequest('/evenement/addEvenement',data,'addEvenement')
+}
+
+async function createPhoto(data){
+    let anwser = await createPhotoFromAPI(data)
+    return anwser;
+}
+
+async function updatePhotoFromAPI(data){
+    return patchRequest('/evenement/updateEvenement',data,'updateEvenement')
+}
+
+async function updatePhoto(data){
+    let anwser = await updatePhotoFromAPI(data)
+    return anwser;
+}
+
 export {
     getAllEvenement,
     deleteEvenement,
-    addEvenement,
-    updateEvenement
+    createEvenement,
+    updateEvenement,
+    getAllPhoto,
+    createPhoto,
+    deletePhoto,
+    updatePhoto
+
 }

@@ -1,14 +1,16 @@
 const userService = require('../services/users.services')
 
+/*
 let users = [];
 console.log('user', userService.getAllUsers());
 userService.getAllUsers().then((data) => {
-    users = data;
+  users = data;
 });
-
+*/
   
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Vérification du nom d'utilisateur
+  console.log('users',users);
   const userWithSameUsername = users.find(
     (user) => user.nom_utilisateur === req.body.nom_utilisateur
   );
@@ -18,7 +20,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     });
     return;
   }
-  
+    
   // Vérification de l'adresse e-mail
   const userWithSameEmail = users.find(
     (user) => user.email === req.body.email
@@ -29,7 +31,6 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     });
     return;
   }
-  
   next();
 };
   

@@ -1,6 +1,7 @@
 const usersService = require("../services/users.services")
 
 exports.getAllUsers = (req,res) => {
+    console.log("pass");
     usersService.getAllUsers((error, data) => {
         if(error){
             return res.status(500).send("error");

@@ -1,20 +1,26 @@
 const pool = require("../database/db")
 
-async function getAllUsersAsync () {
+async function getAllUsersAsync() {
     console.log("res");
     try {
         const conn = await pool.connect();
-        const result = await conn.query("SELECT * FROM utilisateur;");
-        conn.release();
-        return result;
+        console.log("Connexion à la base de données établie avec succès", conn);
+        try {
+            const result = await conn.query("SELECT * FROM utilisateur;");
+            conn.release();
+            return result.rows;
+        } catch (error) {
+            console.error("Échec de la requête à la base de données :", error);
+            conn.release();
+            throw error;
+        }
     } catch (error) {
-        console.error('Error in getAllUsersAsync : ',error);
-        throw error
+        console.error("Échec de la connexion à la base de données :", error);
+        throw error;
     }
 }
 
 const getAllUsers = (callback) => {
-    console.log('pass');
     getAllUsersAsync().then(res => {
         callback(null, res);
     }).catch(error => {

@@ -14,7 +14,9 @@ exports.getAllBouquet = (req,res) => {
 exports.createBouquet = (req,res) => {
     let nom_bouquet = req.body.nom_bouquet;
     let prix_bouquet = req.body.prix_bouquet;
-    bouquetService.createBouquet(nom_bouquet,prix_bouquet,(error, data) => {
+    let description = req.body.description;
+    let image_bouquet = req.body.image_bouquet;
+    bouquetService.createBouquet(nom_bouquet,prix_bouquet,description,image_bouquet,(error, data) => {
         if(error){
             return res.status(500).send("error");
         }

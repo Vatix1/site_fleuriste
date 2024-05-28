@@ -10,9 +10,14 @@ import CadeauView from '../views/CadeauView.vue';
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import PanneauBouquet from '@/components/PanneauBouquet.vue';
-const Profile = () => import('../components/Profile.vue')
-const BoardUser = () => import('../components/BoardUser.vue')
-const BoardAdmin = () => import('../components/BoardAdmin.vue')
+import PanneauEvenement from '@/components/PanneauEvenement.vue';
+import PanneauSdT from '@/components/PanneauSdT.vue';
+import PanneauCadeau from '@/components/PanneauCadeau.vue';
+import PanneauUtilisateur from '@/components/PanneauUtilisateur.vue'
+import BoardAdmin from '../components/BoardAdmin.vue';
+// import BoardMod from '@/components/BoardMod.vue';
+import BoardUser from '../components/BoardUser.vue';
+import Profile from '../components/Profile.vue';
 
 const routes = [
   {
@@ -71,10 +76,36 @@ const routes = [
     component: Profile,
   },
   {
-    path: '/panneau',
-    name: 'panneau',
+    path: '/panneauBouquet',
+    name: 'panneauBouquet',
     component: PanneauBouquet
+  },
+  {
+    path: '/panneauEvenement',
+    name: 'panneauEvenement',
+    component: PanneauEvenement
+  },
+  {
+    path: '/panneauSdT',
+    name: 'panneauSdT',
+    component: PanneauSdT
+  },
+  {
+    path: '/panneauCadeau',
+    name: 'panneauCadeau',
+    component: PanneauCadeau
+  },
+  {
+    path: '/boardAdmin',
+    name: 'boardAdmin',
+    component: BoardAdmin
+  },
+  {
+    path: '/panneauUtilisateur',
+    name: 'panneauUtilisateur',
+    component: PanneauUtilisateur
   }
+
 
 ];
 
@@ -84,7 +115,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from,next) => {
-  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneau'];
+  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneauBouquet','/panneauEvenement','/panneauSdT','/boardAdmin','/panneauUtilisateur'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   if(authRequired && !loggedIn){

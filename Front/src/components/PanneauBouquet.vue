@@ -7,67 +7,63 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <button class="btn show-add-bouquet" @click="toggleBouquet">{{ showAddBouquet ? 'Ajouter un bouquet' : 'Fermer'}}</button>
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Ajouter un bouquet</h3>
+                <button class="btn show-add-bouquet" @click="toggleAddBouquet">{{ showAddBouquet ? 'Fermer' : 'Ajouter un bouquet'}}</button>
+                <div v-if="showAddBouquet" class="card">
+                <div class="card-header">
+                    <h3>Ajouter un bouquet</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="newBouquetName" required>
                     </div>
-                    <div class="card-body">
-                        <form>
-                        <div class="form-group">
-                            <label for="nom">Nom</label>
-                            <input type="text" class="form-control" id="nom" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="prix">Prix</label>
-                            <input type="number" step="0.01" class="form-control" id="prix" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="description" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
-                        </form>
+                    <div class="form-group">
+                        <label for="prix">Prix</label>
+                        <input type="number" step="0.01" class="form-control" id="newBouquetPrix" required>
                     </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="newBouquetDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control-file" id="newBouquetImage">
+                    </div>
+                    <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription,newBouquetImage)">Ajouter</button>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th>Prix</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="bouquet in bouquets" :key="bouquet.id">
-                        <td>{{ bouquet.nom }}</td>
-                        <td>{{ bouquet.description }}</td>
-                        <td><img :src="bouquet.image" alt="bouquet" width="100"></td>
-                        <td>{{ bouquet.prix }} €</td>
-                        <td>
-                        <button class="btn btn-secondary" @click="editBouquet(bouquet)">Modifier</button>
-                        <button class="btn btn-danger" @click="deleteBouquet(bouquet.id)">Supprimer</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row" v-if="editedBouquet">
-            <div class="col-12">
-             <BouquetForm :bouquet="editedBouquet" @cancel="editedBouquet = null" @save="saveEditedBouquet"></BouquetForm>
-            </div>
+        <div v-for="(bouquet, bouquetIndex) in this.bouquets" :key="bouquetIndex" class="card-min">
+          <hr>
+          <h2>{{ bouquet.nom_bouquet }}</h2>
+          <p class="text">
+            <u>Prix :</u> <input type="number" :id="'bouquetPrice_' + bouquet.prix_bouquet" v-model="bouquet.prix_bouquet" min="1"> €<br>
+          </p>
+          <div class="details-container">
+            <hr>
+            <p class="text">
+                <u>Description :</u> <textarea :id="'bouquetDescription_' + bouquet.description" v-model="bouquet.description"></textarea>
+            </p>
+          </div>
+          <div class="image-container">
+            <hr>
+            <img :src="bouquet.image" alt="bouquet">
+            <hr>
+            <input type="file" @change="updateBouquetImage(bouquet, $event)">
+          </div>
+          <div class="counter-container">
+            <button class="btn btn-secondary" @click="updateArticle(article.id_article,article.nom_article, article.prix_article, article.id_type_article)">Modifier</button>
+            <button class="btn btn-danger" @click="deleteArticle(article.id_article)">Supprimer</button>
+          </div>
         </div>
     </div>
 </template>
   
 <script>
-import { deleteBouquet, addBouquet, updateBouquet, getAllBouquet } from "../services/bouquet.services";
+import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../services/bouquet.services";
 
   
   export default {
@@ -76,43 +72,29 @@ import { deleteBouquet, addBouquet, updateBouquet, getAllBouquet } from "../serv
     data() {
       return {
         bouquets: [],
-        bouquet:[],
-        dialogCreateBouquet: false,
-        newBouquetName:'',
-        newBouquetPrix:'',
-        newBouquetDescription:'',
-        updateBouquetName:'',
-        updateBouquetPrix:'',
-        updateBouquetDescription:'',
+        showAddBouquet: false,
       };
     },
     async mounted() {
-      this.bouquets = await getAllBouquet();
+        this.bouquets = await this.getBouquet();
     },
+
     methods: {
-        openCreateBouquetDialog() {
-            this.dialogCreateBouquet = true;
+        async getBouquet() {
+            return await getAllBouquet();
         },
-        closeCreateBouquetDialog(){
-            this.dialogCreateBouquet = false;
-            this.newBouquetName = '';
-            this.newBouquetPrix = '';
-            this.newBouquetDescription = '';
+        toggleAddBouquet() {
+            this.showAddBouquet = !this.showAddBouquet;
         },
-        openUpdateBouquetDialog() {
-            this.dialogUpdateBouquet = true;
-        },
-        closeUpdateBouquetDialog() {
-            this.dialogUpdateBouquet = false;
-            this.bouquet = [];
-        },
-        async createNewBouquet(){
+        async createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription = '',newBouquetImage = ''){
             const data = {
-                nom_bouquet: this.newBouquetName,
-                prix_bouquet: this.newBouquetPrix,
-                description: this.newBouquetDescription,
+                nom_bouquet: newBouquetName,
+                prix_bouquet: newBouquetPrix,
+                description: newBouquetDescription,
+                image_bouquet: newBouquetImage
             }
-            await addBouquet(data);
+            console.log("bouquet", data);
+            await createBouquet(data);
         },
         async updateBouquet(id) {
             const data = {
