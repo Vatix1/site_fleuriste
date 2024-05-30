@@ -16,15 +16,15 @@
                     <form>
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" class="form-control" id="newBouquetName" required>
+                        <input type="text" class="form-control" id="newBouquetName" v-model="newBouquetName" required>
                     </div>
                     <div class="form-group">
                         <label for="prix">Prix</label>
-                        <input type="number" step="0.01" class="form-control" id="newBouquetPrix" required>
+                        <input type="number" step="0.01" class="form-control" id="newBouquetPrix" v-model="newBouquetPrix" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="newBouquetDescription" rows="3"></textarea>
+                        <textarea class="form-control" id="newBouquetDescription" v-model="newBouquetDescription" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
@@ -36,28 +36,30 @@
                 </div>
             </div>
         </div>
-        <div v-for="(bouquet, bouquetIndex) in this.bouquets" :key="bouquetIndex" class="card-min">
-          <hr>
-          <h2>{{ bouquet.nom_bouquet }}</h2>
-          <p class="text">
-            <u>Prix :</u> <input type="number" :id="'bouquetPrice_' + bouquet.prix_bouquet" v-model="bouquet.prix_bouquet" min="1"> €<br>
-          </p>
-          <div class="details-container">
+        <div class="row">
+             <div v-for="(bouquet, bouquetIndex) in this.bouquets" :key="bouquetIndex" class="card-min">
             <hr>
+            <h2>{{ bouquet.nom_bouquet }}</h2>
             <p class="text">
-                <u>Description :</u> <textarea :id="'bouquetDescription_' + bouquet.description" v-model="bouquet.description"></textarea>
+                <u>Prix :</u> <input type="number" :id="'bouquetPrice_' + bouquet.prix_bouquet" v-model="bouquet.prix_bouquet" min="1"> €<br>
             </p>
-          </div>
-          <div class="image-container">
-            <hr>
-            <img :src="bouquet.image" alt="bouquet">
-            <hr>
-            <input type="file" @change="updateBouquetImage(bouquet, $event)">
-          </div>
-          <div class="counter-container">
-            <button class="btn btn-secondary" @click="updateArticle(article.id_article,article.nom_article, article.prix_article, article.id_type_article)">Modifier</button>
-            <button class="btn btn-danger" @click="deleteArticle(article.id_article)">Supprimer</button>
-          </div>
+            <div class="details-container">
+                <hr>
+                <p class="text">
+                    <u>Description :</u> <textarea :id="'bouquetDescription_' + bouquet.description" v-model="bouquet.description"></textarea>
+                </p>
+            </div>
+            <div class="image-container">
+                <hr>
+                <img :src="bouquet.image" alt="bouquet">
+                <hr>
+                <input type="file" @change="updateBouquetImage(bouquet, $event)">
+            </div>
+            <div class="counter-container">
+                <button class="btn btn-secondary" @click="updateBouquet(bouquet.id_bouquet,bouquet.nom_bouquet, bouquet.prix_bouquet, bouquet.description)">Modifier</button>
+                <button class="btn btn-danger" @click="deleteBouquet(bouquet.id_bouquet)">Supprimer</button>
+            </div>
+            </div>
         </div>
     </div>
 </template>

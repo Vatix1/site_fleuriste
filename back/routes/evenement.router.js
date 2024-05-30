@@ -78,7 +78,7 @@ router.post("/createEvenement", evenementController.createEvenement);
  *     summary: supprime un evenement
  *     parameters:
  *       - in: query
- *         name: id_evenement
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer

@@ -19,10 +19,12 @@ async function deleteEvenement(id){
 }
 
 async function createEvenementFromAPI(data){
+    console.log('event',data);
     return postRequest('/evenement/createEvenement',data,'createEvenement')
 }
 
 async function createEvenement(data){
+    console.log('pass');
     let anwser = await createEvenementFromAPI(data)
     return anwser;
 }
@@ -80,6 +82,5 @@ export {
     getAllPhoto,
     createPhoto,
     deletePhoto,
-    updatePhoto
-
+    updatePhoto 
 }

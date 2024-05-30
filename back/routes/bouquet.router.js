@@ -79,7 +79,7 @@ router.post("/createBouquet", bouquetController.createBouquet);
  *     summary: supprime un bouquet
  *     parameters:
  *       - in: query
- *         name: id_bouquet
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer

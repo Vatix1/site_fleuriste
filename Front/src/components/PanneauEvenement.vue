@@ -16,9 +16,9 @@
                     <form>
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" class="form-control" id="newEvenementName" required>
+                        <input type="text" class="form-control" id="newEvenementName" required v-model="newEvenementName">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewEvenement">Ajouter</button>
+                    <button type="submit" class="btn btn-primary" @click="createNewEvenement(newEvenementName)">Ajouter</button>
                     </form>
                 </div>
                 </div>
@@ -26,16 +26,14 @@
         </div>
         <div class="row">
             <div v-for="(evenement, evenementIndex) in this.evenements" :key="evenementIndex" class="card-min">
-          <hr>
-          <h2>{{ evenement.nom_evenement }}</h2>
-          <div class="counter-container">
-            <button class="btn btn-secondary" @click="updateEvenement(evenement.id_evenement,evenement.nom_evenement)">Modifier</button>
-            <button class="btn btn-danger" @click="deleteEvenement(evenement.id_evenement)">Supprimer</button>
-          </div>
+                <hr>
+                <h2>{{ evenement.nom_evenement }}</h2>
+                <div class="counter-container">
+                    <button class="btn btn-secondary" @click="updateEvenement(evenement.id_evenement,evenement.nom_evenement)">Modifier</button>
+                    <button class="btn btn-danger" @click="supprimerEvenement(evenement.id_evenement)">Supprimer</button>
+                </div>
+            </div>
         </div>
-        </div>
-       
-
         <div class="row">
             <div class="col-12">
                 <button class="btn show-add-bouquet" @click="toggleAddPhoto">{{ showAddPhoto ? 'Fermer' : 'Ajouter une photo'}}</button>
@@ -82,7 +80,7 @@
     </div>
 </template>
 <script>
-import { getAllEvenement } from '@/services/evenement.services';
+import { getAllEvenement, deleteEvenement, createEvenement, updateEvenement, getAllPhoto } from '@/services/evenement.services';
 
 export default {
     name: 'PanneauEvenement',
@@ -90,6 +88,7 @@ export default {
     data() {
         return {
             evenements: [],
+            photos:[],
             showAddPhoto: false,
             showAddEvenement: false,
             selectedEvenement: {}
@@ -110,9 +109,22 @@ export default {
         async getEvenement() {
             return await getAllEvenement();
         },
-        updateEvenement(){
-            
+        async getPhoto(){
+            return await getAllPhoto();
+        },
+        async updateEvenement(nom_evenement){
+            await updateEvenement(nom_evenement)
+        },
+        async supprimerEvenement(id_evenement){
+            await deleteEvenement(id_evenement);
+        },
+        async createNewEvenement(newEvenementName) {
+            let data = {
+                nom_evenement: newEvenementName
+            }
+            await createEvenement(data);
         }
+
     }
 }
 </script>

@@ -135,7 +135,7 @@ router.delete("/deleteBougie", cadeauController.deleteBougie);
 /**
  * @swagger
  * /cadeau/updateBougie:
- *   post:
+ *   patch:
  *     tags: [Cadeau]
  *     summary: modifier une bougie
  *     requestBody:
@@ -161,7 +161,7 @@ router.delete("/deleteBougie", cadeauController.deleteBougie);
  *         description: Internal error
  */
 
-router.post("/updateBougie", cadeauController.updateBougie);
+router.patch("/updateBougie", cadeauController.updateBougie);
 
 /**
  * @swagger
@@ -237,7 +237,7 @@ router.delete("/deleteThe", cadeauController.deleteThe);
 /**
  * @swagger
  * /cadeau/updateThe:
- *   post:
+ *   patch:
  *     tags: [Cadeau]
  *     summary: modifier un the
  *     requestBody:
@@ -263,7 +263,7 @@ router.delete("/deleteThe", cadeauController.deleteThe);
  *         description: Internal error
  */
 
-router.post("/updateThe", cadeauController.updateThe);
+router.patch("/updateThe", cadeauController.updateThe);
 
 /**
  * @swagger
@@ -346,7 +346,7 @@ router.delete("/deleteFormule", cadeauController.deleteFormule);
 /**
  * @swagger
  * /cadeau/updateFormule:
- *   post:
+ *   patch:
  *     tags: [Cadeau]
  *     summary: modifier une formule
  *     requestBody:
@@ -377,6 +377,6 @@ router.delete("/deleteFormule", cadeauController.deleteFormule);
  *       500:
  *         description: Internal error
  */
-router.post("/updateFormule", cadeauController.updateFormule)
+router.patch("/updateFormule", cadeauController.updateFormule)
 
 module.exports = router;

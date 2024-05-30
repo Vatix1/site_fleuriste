@@ -46,10 +46,12 @@ async function getAllTypeArticle() {
 }
 
 async function createTypeArticleFromAPI(data) {
+    console.log('sdt',data);
     return postRequest('/salondethe/createTypeArticle',data,'createTypeArticle')
 }
 
 async function createTypeArticle(data) {
+    console.log('pass type');
     let anwser = await createTypeArticleFromAPI(data)
     return anwser.data;
 }

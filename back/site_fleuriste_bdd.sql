@@ -1,22 +1,22 @@
 -- DROP TABLE IF EXISTS utilisateur,roles, evenements,user_role, bougie, the,article, bouquet, formule;
-DROP TABLE IF EXISTS formule, bouquet,type_article, article, the,bougie , user_role,photo_evenement, evenements, roles, utilisateur;
+DROP TABLE IF EXISTS formule, bouquet, the,bougie,type_article, article ,photo_evenements, evenements, roles, utilisateur;
 
--- DROP TABLE IF EXISTS roles CASCADE ;
-
-CREATE TABLE utilisateur(
-   id_utilisateur SERIAL,
-   nom_utilisateur VARCHAR(50),
-   mot_de_passe VARCHAR(50),
-   email VARCHAR(150),
-   id_role INT,
-   PRIMARY KEY(id_utilisateur),
-   FOREIGN KEY(id_role) REFERENCES roles(id_role)
-);
+--DROP TABLE IF EXISTS evenements CASCADE ;
 
 CREATE TABLE roles (
    id_role SERIAL,
    nom_role VARCHAR(50),
    PRIMARY KEY(id_role)
+);
+
+CREATE TABLE utilisateur(
+   id_utilisateur SERIAL,
+   nom_utilisateur VARCHAR(50),
+   mot_de_passe VARCHAR(250),
+   email VARCHAR(150),
+   id_role INT,
+   PRIMARY KEY(id_utilisateur),
+   FOREIGN KEY(id_role) REFERENCES roles(id_role)
 );
 
 CREATE TABLE evenements(
@@ -34,12 +34,10 @@ CREATE TABLE photo_evenements (
 );
 
 
-CREATE TABLE bougie(
-   id_bougie SERIAL,
-   nom_bougie VARCHAR(50),
-   prix_bougie NUMERIC(15,2),
-   image_bougie VARCHAR(250),
-   PRIMARY KEY(id_bougie)
+CREATE TABLE type_article(
+   id_type_article SERIAL,
+   nom_type_article VARCHAR(50),
+   PRIMARY KEY(id_type_article)
 );
 
 CREATE TABLE article(
@@ -51,10 +49,12 @@ CREATE TABLE article(
    FOREIGN KEY (id_type_article) REFERENCES type_article(id_type_article)
 );
 
-CREATE TABLE type_article(
-   id_type_article SERIAL,
-   nom_type_article VARCHAR(50),
-   PRIMARY KEY(id_type_article)
+CREATE TABLE bougie(
+   id_bougie SERIAL,
+   nom_bougie VARCHAR(50),
+   prix_bougie NUMERIC(15,2),
+   image_bougie VARCHAR(250),
+   PRIMARY KEY(id_bougie)
 );
 
 CREATE TABLE the(
@@ -88,26 +88,32 @@ CREATE TABLE formule(
 
 );
 
-INSERT INTO utilisateur (nom_utilisateur, mot_de_passe) VALUES
-   ('JeanDupont', 'password1'),
-   ('MarieDurand', 'password2');
-
 INSERT INTO roles (nom_role) VALUES
    ('user'),
    ('moderator'),
    ('admin');
 
+INSERT INTO utilisateur (nom_utilisateur, mot_de_passe,email,id_role) VALUES
+   ('JeanDupont', 'password1','JeanDupont@gmail.com',1),
+   ('MarieDurand', 'password2','MarieDurand@gmail.com',1);
+
 INSERT INTO evenements (nom_evenement) VALUES
    ('Anniversaire'),
    ('Mariage');
 
-INSERT INTO bougie (nom_bougie, prix_bougie) VALUES
-   ('Bougie Parfumée', 15.99),
-   ('Bougie Scented', 12.99);
+INSERT INTO type_article (nom_type_article) VALUES
+    ('Boisson'),
+    ('Gateau');
 
 INSERT INTO article (nom_article, prix_article) VALUES
    ('Café', 3.99),
-   ('Sirop de Grenadine', 2.99);
+   ('Sirop de Grenadine', 2.99),
+   ('Macaron',1.99);
+
+
+INSERT INTO bougie (nom_bougie, prix_bougie) VALUES
+   ('Bougie Parfumée', 15.99),
+   ('Bougie Scented', 12.99);
 
 INSERT INTO the (nom_the, prix_the) VALUES
    ('Thé Vert', 5.99),
@@ -120,4 +126,3 @@ INSERT INTO bouquet (nom_bouquet, prix_bouquet) VALUES
 INSERT INTO formule (nom_formule, prix_formule, id_bouquet, id_bougie, id_the) VALUES
    ('Formule Anniversaire', 50.97, 1, 1, 1),
    ('Formule Mariage', 60.96, 2, 2, 2);
-

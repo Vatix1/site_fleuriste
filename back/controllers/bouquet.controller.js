@@ -37,7 +37,8 @@ exports.updateBouquet = (req,res) => {
 };
 
 exports.deleteBouquet = (req,res) => {
-    let id_bouquet = req.query.id_bouquet
+    let id_bouquet = req.query.id
+    console.log('del bouquet', id_bouquet);
     bouquetService.deleteBouquet(id_bouquet,(error,data) => {
         if(error){
             return res.status(500).send("error");

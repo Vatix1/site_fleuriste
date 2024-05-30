@@ -35,7 +35,7 @@ exports.updateBougie = (req,res) => {
 };
 
 exports.deleteBougie = (req,res) => {
-    let id_bougie = req.query.id_bougie;
+    let id_bougie = req.query.id;
     cadeauService.deleteBougie(id_bougie,(error,data) => {
         if(error){
             return res.status(500).send("error");
@@ -79,7 +79,7 @@ exports.updateThe = (req,res) => {
 };
 
 exports.deleteThe = (req,res) => {
-    let id_the = req.query.id_the
+    let id_the = req.query.id
     cadeauService.deleteThe(id_the,(error,data) => {
         if(error){
             return res.status(500).send("error");
@@ -129,7 +129,7 @@ exports.updateFormule = (req,res) => {
 };
 
 exports.deleteFormule = (req,res) => {
-    let id_formule = req.query.id_formule
+    let id_formule = req.query.id
     cadeauService.deleteFormule(id_formule,(error,data) => {
         if(error){
             return res.status(500).send("error");

@@ -10,7 +10,8 @@ async function getAllBouquet(){
 }
 
 async function deleteBouquetFromAPI(id){
-    return deleteRequest('/bouquets/deleteBouquet?id='+id, 'deleteBouquet')
+    console.log("del boquet",id)
+    return deleteRequest('/bouquet/deleteBouquet?id='+id, 'deleteBouquet')
 }
 
 async function deleteBouquet(id){
@@ -20,7 +21,7 @@ async function deleteBouquet(id){
 
 async function createBouqueutFromAPI(data){
     console.log("pass",data);
-    return postRequest('/bouquets/createBouquet',data,'createBouquet')
+    return postRequest('/bouquet/createBouquet',data,'createBouquet')
 }
 
 async function createBouquet(data){
@@ -29,7 +30,7 @@ async function createBouquet(data){
 }
 
 async function updateBouquetFromAPI(data){
-    return patchRequest('/bouquets/updateBouquet',data,'updateBouquet')
+    return patchRequest('/bouquet/updateBouquet',data,'updateBouquet')
 }
 
 async function updateBouquet(data){

@@ -22,6 +22,13 @@ const salondetheController = require('../controllers/salonDeThe.controller')
  *         nom:
  *           type: string
  *           example: "Big Red"
+ *     TypeArticle:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         nom:
+ *           type: string 
  */
 
 /**
@@ -122,5 +129,97 @@ router.delete("/deleteArticle", salondetheController.deleteArticle);
  *         description: Internal error
  */
 router.post("/updateArticle", salondetheController.updateArticle);
+
+/**
+ * @swagger
+ * /salondethe/getAllTypeArticle:
+ *   get:
+ *     tags: [Article]
+ *     summary: Get all type article
+ *     responses:
+ *       200:
+ *         description: Liste des type d'article
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/TypeArticle'
+ *       500:
+ *         description: Internal error
+ */
+router.get("/getAllTypeArticle", salondetheController.getAllTypeArticle);
+
+/**
+ * @swagger
+ * /salondethe/createTypeArticle:
+ *   post:
+ *     tags: [Article]
+ *     summary: creer un nouveau type article
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - nom_type_article
+ *             properties:
+ *               nom_type_article:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: type article creer avec succes
+ *       500:
+ *         description: Internal error
+ */
+router.post("/createTypeArticle", salondetheController.createTypeArticle);
+
+/**
+ * @swagger
+ * /salondethe/updateTypeArticle:
+ *   patch:
+ *     tags: [Article]
+ *     summary: modifier un type article
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id_type_article
+ *               - nom_type_article
+ *             properties:
+ *               id_type_article:
+ *                 type: integer
+ *               nom_type_article:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: type article modifier avec succes
+ *       500:
+ *         description: Internal error
+ */
+router.patch("/updateTypeArticle", salondetheController.updateTypeArticle);
+
+/**
+ * @swagger
+ * /salondethe/deleteTypeArticle:
+ *   delete:
+ *     tags: [Article]
+ *     summary: supprime un type article
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           description: id du type article a supprimer
+ *     responses:
+ *       200:
+ *         description: type article supprimer avec succes
+ *       500:
+ *         description: Internal error
+ */
+router.delete("/deleteTypeArticle", salondetheController.deleteTypeArticle);
 
 module.exports = router;

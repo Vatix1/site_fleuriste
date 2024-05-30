@@ -35,8 +35,51 @@ exports.updateArticle = (req,res) => {
 };
 
 exports.deleteArticle = (req,res) => {
-    let id_article = req.query.id_article
+    let id_article = req.query.id
+    console.log('id', id_article);
     salondetheService.deleteArticle(id_article,(error,data) => {
+        if(error){
+            return res.status(500).send("error");
+        }
+        return res.status(200).send(data);
+    })
+};
+
+exports.getAllTypeArticle = (req,res) => {
+    salondetheService.getAllTypeArticle((error, data) => {
+        if(error){
+            return res.status(500).send("error");
+        }
+        else {
+            return res.status(200).send(data);
+        }
+    })
+};
+
+exports.createTypeArticle = (req,res) => {
+    let nom_type_article = req.body.nom_type_article;
+    salondetheService.createTypeArticle(nom_type_article,(error, data) => {
+        if(error){
+            return res.status(500).send("error");
+        }
+        return res.status(200).send(data);
+    })
+};
+
+exports.updateTypeArticle = (req,res) => {
+    let id_type_article = req.body.id_type_article;
+    let nom_type_article = req.body.nom_type_article
+    salondetheService.updateTypeArticle(id_type_article,nom_type_article,(error,data) => {
+        if(error){
+            return res.status(500).send("error");
+        }
+        return res.status(200).send(data);
+    })
+};
+
+exports.deleteTypeArticle = (req,res) => {
+    let id_type_article = req.query.id
+    salondetheService.deleteTypeArticle(id_type_article,(error,data) => {
         if(error){
             return res.status(500).send("error");
         }

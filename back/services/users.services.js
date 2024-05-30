@@ -1,21 +1,13 @@
 const pool = require("../database/db")
 
 async function getAllUsersAsync() {
-    console.log("res");
     try {
         const conn = await pool.connect();
-        console.log("Connexion à la base de données établie avec succès", conn);
-        try {
-            const result = await conn.query("SELECT * FROM utilisateur;");
-            conn.release();
-            return result.rows;
-        } catch (error) {
-            console.error("Échec de la requête à la base de données :", error);
-            conn.release();
-            throw error;
-        }
+        const result = await conn.query("SELECT * FROM utilisateur;");
+        conn.release();
+        return result.rows;
     } catch (error) {
-        console.error("Échec de la connexion à la base de données :", error);
+        console.error("Error in getAllUsersAsync:", error);
         throw error;
     }
 }
@@ -29,20 +21,20 @@ const getAllUsers = (callback) => {
     });
 }
 
-async function getUserByNameAsync(nom_utilisateur) {
+async function getAllRolesAsync() {
     try {
         const conn = await pool.connect();
-        const result = await conn.query("SELECT * FROM utilisateur WHERE nom_utilisateur = $1;",[nom_utilisateur])
+        const result = await conn.query("SELECT * FROM roles")
         conn.release();
         return result.rows;
     } catch (error) {
-        console.error('Error in getUserByNameAsync : ',error);
-        throw error
+        console.error("Error in getAllRolesAsync :", error);
+        throw error;
     }
 }
 
-const getUserByName = (nom_utilisateur,callback) => {
-    getUserByNameAsync(nom_utilisateur).then(res => {
+const getAllRoles = (callback) => {
+    getAllRolesAsync().then(res => {
         callback(null, res);
     }).catch(error => {
         console.log(error);
@@ -50,20 +42,62 @@ const getUserByName = (nom_utilisateur,callback) => {
     })
 }
 
-async function getRoleByUserAsync(id_utilisateur) {
+async function updateUtilisateurAsync(id_utilisateur,id_role) {
     try {
         const conn = await pool.connect();
-        const result = await conn.query("SELECT id_role FROM user_role WHERE id_utilisateur=$1;", [id_utilisateur])
+        const result = await conn.query("UPDATE utilisateur SET id_role =$2 WHERE id_utilisateur =$1;",[id_utilisateur,id_role]);
         conn.release();
         return result.rows;
     } catch (error) {
-        console.error('Error in getRoleByUserAsync : ',error);
-        throw error
+        console.error("Error in updateUtilisateurAsync :", error);
+        throw error;
     }
 }
 
-const getRoleByUser = (id_utilisateur,callback) => {
-    getRoleByUserAsync(id_utilisateur).then(res => {
+const updateUtilisateur = (id_utilisateur, id_role, callback) => {
+    updateUtilisateurAsync(id_utilisateur,id_role).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        console.log(error);
+        callback(error, null);
+    })
+}
+
+async function deleteUtilisateurAsync(id_utilisateur) {
+    try {
+        const conn = await pool.connect();
+        const result = await conn.query("DELETE FROM utilisateur WHERE id_utilisateur=$1;",[id_utilisateur])
+        conn.release();
+        return result.rows;
+    } catch (error) {
+        console.error("Error in deleteUtilisateurAsync :", error);
+        throw error;
+    }
+}
+
+const deleteUtilisateur = (id_utilisateur, callback) => {
+    console.log('del',id_utilisateur);
+    deleteUtilisateurAsync(id_utilisateur).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        console.log(error);
+        callback(error, null);
+    })
+}
+
+async function createUtilisateurAsync(nom_utilisateur, mot_de_passe) {
+    try {
+        const conn = await pool.connect();
+        const result = await conn.query("INSERT INTO utilisateur (nom_utilisateur, mot_de_passe,id_role) VALUES ($1,$2,1);",[nom_utilisateur,mot_de_passe])
+        conn.release();
+    } catch (error) {
+        console.error("Error in createUtilisateurAsync :", error);
+        throw error;
+    }
+}
+
+const createUtilisateur = (nom_utilisateur, mot_de_passe, callback) => {
+    createUtilisateurAsync(nom_utilisateur,mot_de_passe).then(res => {
         callback(null, res);
     }).catch(error => {
         console.log(error);
@@ -73,6 +107,8 @@ const getRoleByUser = (id_utilisateur,callback) => {
 
 module.exports = {
     getAllUsers: getAllUsers,
-    getUserByName: getUserByName,
-    getRoleByUser: getRoleByUser,
+    getAllRoles: getAllRoles,
+    updateUtilisateur: updateUtilisateur,
+    deleteUtilisateur: deleteUtilisateur,
+    createUtilisateur: createUtilisateur
 }

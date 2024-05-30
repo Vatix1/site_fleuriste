@@ -5,7 +5,7 @@ const cadeauRoutes = require('./routes/cadeau.router')
 const evenementRoutes = require('./routes/evenement.router')
 const salondetheRoutes = require('./routes/salondethe.router')
 const userRoutes = require('./routes/users.router')
-const authRoutes = require('./routes/auth.routes')
+//const authRoutes = require('./routes/auth.routes')
 
 dotenv.config();
 const app = express();
@@ -65,7 +65,7 @@ app.use("/cadeau", cadeauRoutes);
 app.use("/evenement", evenementRoutes)
 app.use("/salondethe", salondetheRoutes)
 app.use("/users", userRoutes)
-app.use("/auth", authRoutes)
+//app.use("/auth", authRoutes)
 
 
 app.listen(process.env.PORT, () => {

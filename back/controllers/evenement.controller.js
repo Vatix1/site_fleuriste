@@ -33,7 +33,7 @@ exports.updateEvenement = (req,res) => {
 };
 
 exports.deleteEvenement = (req,res) => {
-    let id_evenement = req.query.id_evenement
+    let id_evenement = req.query.id
     console.log("controller",id_evenement);
     evenementService.deleteEvenement(id_evenement,(error,data) => {
         if(error){

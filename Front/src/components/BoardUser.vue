@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import UserService from '../services/users.services';
+//import UserService from '../services/users.services';
 
 export default {
     name: 'BoardUser',
@@ -16,6 +16,7 @@ export default {
             content: "",
         };
     },
+    /*
     mounted() {
         UserService.getUserBoard().then(
             (response) => {
@@ -27,5 +28,6 @@ export default {
             }
         );
     },
+    */
 };
 </script>

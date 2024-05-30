@@ -115,7 +115,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from,next) => {
-  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneauBouquet','/panneauEvenement','/panneauSdT','/boardAdmin','/panneauUtilisateur'];
+  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneauBouquet','/panneauEvenement','/panneauSdT','/boardAdmin','/panneauUtilisateur','/panneauCadeau'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   if(authRequired && !loggedIn){

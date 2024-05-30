@@ -20,6 +20,7 @@ async function deleteBougie(id){
 }
 
 async function addBougieFromAPI(data){
+    console.log('bougie',data);
     return postRequest('/cadeau/addBougie',data,'addBougie')
 }
 
@@ -56,6 +57,7 @@ async function deleteThe(id){
 }
 
 async function addTheFromAPI(data){
+    console.log('the', data);
     return postRequest('/cadeau/addThe',data,'addThe')
 }
 
@@ -92,6 +94,7 @@ async function deleteFormule(id){
 }
 
 async function addFormuleFromAPI(data){
+    console.log('formule',data);
     return postRequest('/cadeau/addFormule',data,'addFormule')
 }
 
