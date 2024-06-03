@@ -1,5 +1,10 @@
 const usersService = require("../services/users.services")
 
+exports.testPost = (req, res) => {
+    console.log('je passe')
+    res.send("Test Post")
+}
+
 exports.getAllUsers = (req,res) => {
     usersService.getAllUsers((error, data) => {
         if(error){

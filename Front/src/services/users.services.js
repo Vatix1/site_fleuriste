@@ -1,8 +1,12 @@
 import { deleteRequest, getRequest, patchRequest, postRequest } from "./axios.services";
 //import authHeader from "./auth-header";
 
+async function testPost(){
+    return postRequest('/user/testPost', 'testPost')
+}
+
 async function getAllUsersFromAPI(){
-    return getRequest('/users/getAllUsers', 'getAllUsers')
+    return getRequest('/user/getAllUsers', getAllUsers)
 }
 
 async function getAllUsers() {
@@ -11,7 +15,7 @@ async function getAllUsers() {
 }
 
 async function getAllRolesFromAPI() {
-    return getRequest('/users/getAllRoles', 'getAllRoles')
+    return getRequest('/user/getAllRoles', getAllRoles)
 }
 
 async function getAllRoles() {
@@ -20,7 +24,7 @@ async function getAllRoles() {
 }
 
 async function updateUtilisateurFromAPI(data) {
-    return patchRequest('/users/updateUtilisateur',data, 'updateUtilisateur')
+    return patchRequest('/user/updateUtilisateur',data, updateUtilisateur)
 }
 
 async function updateUtilisateur(data) {
@@ -29,7 +33,7 @@ async function updateUtilisateur(data) {
 }
 
 async function deleteUtilisateurFromAPI(id) {
-    return deleteRequest('/users/deleteUtilisateur?id='+id, 'deleteUtilisateur')
+    return deleteRequest('/user/deleteUtilisateur?id='+id, deleteUtilisateur)
 }
 
 async function deleteUtilisateur(id) {
@@ -40,12 +44,12 @@ async function deleteUtilisateur(id) {
 
 async function createUtilisateurFromAPI(data) {
     console.log('pass',data);
-    return postRequest('/users/createUtilisateur',data, 'createUtilisateur')
+    return postRequest('/user/createUtilisateur',data, 'createUtilisateur')
 }
 
 async function createUtilisateur(data) {
-    console.log('create',data);
     let anwser = await createUtilisateurFromAPI(data)
+    console.log('create', anwser);
     return anwser.data
 }
 
@@ -56,7 +60,7 @@ async function loginFromAPI(user) {
         mot_de_passe: user.password
     }
     console.log('pass 2', data);
-    return postRequest('/users/signin',data,'signin')
+    return postRequest('/user/signin',data,'signin')
 }
 
 async function login (user) {
@@ -100,7 +104,8 @@ export{
     deleteUtilisateur,
     createUtilisateur,
     login,
-    logout
+    logout,
+    testPost
 }
 
 

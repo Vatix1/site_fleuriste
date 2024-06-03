@@ -10,7 +10,7 @@
                 <button class="btn show-add-bouquet" @click="toggleAddUtilisateur">{{ showAddUtilisateur ? 'Fermer' : 'Ajouter un utilisateur'}}</button>
                 <div v-if="showAddUtilisateur" class="card">
                 <div class="card-header">
-                    <h3>Ajouter un bouquet</h3>
+                    <h3>Ajouter un utilisateur</h3>
                 </div>
                 <div class="card-body">
                     <form>
@@ -46,21 +46,25 @@
             </select>
           </td>
           <td>
-            <button class="btn btn-primary" v-on:click="modifierUtilisateur(utilisateur.id_utilisateur)">
+            <button class="btn btn-primary" @click="modifierUtilisateur(utilisateur.id_utilisateur)">
               Modifier
             </button>
-            <button class="btn btn-danger" v-on:click="supprimerUtilisateur(utilisateur.id_utilisateur)">
+            <button class="btn btn-danger" @click="supprimerUtilisateur(utilisateur.id_utilisateur)">
               Supprimer
             </button>
           </td>
           </tr>
         </tbody>
       </table>
+      <div>
+        <button @click="testPostFunc"></button>
+        <p>{{ testPost }}</p>
+      </div>
     </div>
   </template>
   
   <script>
-  import { getAllUsers, getAllRoles, updateUtilisateur, createUtilisateur, deleteUtilisateur } from '@/services/users.services'
+  import { getAllUsers, getAllRoles, updateUtilisateur, createUtilisateur, deleteUtilisateur, testPost } from '@/services/users.services'
   
   export default {
     name: "PanneauUtilisateur",
@@ -72,7 +76,8 @@
         selectedRole: {},
         showAddUtilisateur: false,
         newUtilisateurName: '',
-        newUtilisateurMDP: ''
+        newUtilisateurMDP: '',
+        testPost: ''
       };
     },
     async mounted() {
@@ -81,6 +86,10 @@
     },
   
     methods: {
+        async testPostFunc() {
+          console.log(testPost());
+          this.testPost = await testPost();
+        },
         async getUtilisateur() {
             return await getAllUsers();
         },

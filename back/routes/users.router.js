@@ -41,7 +41,7 @@ const userController = require('../controllers/users.controller')
 
 /**
  * @swagger
- * /users/getAllUsers:
+ * /user/getAllUsers:
  *   get:
  *     tags: [Utilisateur]
  *     summary: Get all users
@@ -62,7 +62,7 @@ router.get("/getAllUsers", userController.getAllUsers);
 
 /**
  * @swagger
- * /users/getAllRoles:
+ * /user/getAllRoles:
  *   get:
  *     tags: [Utilisateur]
  *     summary: Get all roles
@@ -83,7 +83,7 @@ router.get("/getAllRoles", userController.getAllRoles);
 
 /**
  * @swagger
- * /users/updateUtilisateur:
+ * /user/updateUtilisateur:
  *   patch:
  *     tags: [Utilisateur]
  *     summary: modifier un utilisateur
@@ -111,7 +111,7 @@ router.patch("/updateUtilisateur", userController.updateUtilisateur);
 
 /**
  * @swagger
- * /users/deleteUtilisateur:
+ * /user/deleteUtilisateur:
  *   delete:
  *     tags: [Utilisateur]
  *     summary: supprime un utilisateur
@@ -132,7 +132,7 @@ router.delete("/deleteUtilisateur", userController.deleteUtilisateur);
 
 /**
  * @swagger
- * /users/createUtilisateur:
+ * /user/createUtilisateur:
  *   post:
  *     tags: [Utilisateur]
  *     summary: creer un nouveau utilisateur
@@ -168,5 +168,7 @@ router.post(
 */
 
 router.post("/signin", userController.signin);
+
+router.post("/testPost",userController.testPost)
 
 module.exports = router;

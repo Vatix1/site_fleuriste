@@ -19,14 +19,16 @@ async function deleteBouquet(id){
     return anwser;
 }
 
-async function createBouqueutFromAPI(data){
-    console.log("pass",data);
-    return postRequest('/bouquet/createBouquet',data,'createBouquet')
-}
-
 async function createBouquet(data){
-    let anwser = await createBouqueutFromAPI(data)
-    return anwser;
+    console.log("pass",data);
+    try {
+        const response = await postRequest('/bouquet/createBouquet',data);
+        console.log(response);
+        return response;
+    } catch (error) {
+        // Gérez les erreurs de la requête POST
+        console.error(error);
+    }
 }
 
 async function updateBouquetFromAPI(data){

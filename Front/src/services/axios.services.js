@@ -47,6 +47,7 @@ async function getRequest(uri, name) {
 async function postRequest(uri, data, name) {
     let response = null
     try {
+        console.log('axios', uri + data);
         response = await axiosAgent.post(uri, data)
     } catch (err) {
         response = handleError(name, err);
@@ -58,6 +59,7 @@ async function postRequest(uri, data, name) {
 async function patchRequest(uri, data, name) {
     let response = null
     try {
+        console.log('axios 2 ', uri+ data);
         response = await axiosAgent.patch(uri, data)
     } catch (err) {
         response = handleError(name, err);
@@ -77,7 +79,7 @@ async function deleteRequest(uri, data, name) {
 
 export {
     getRequest,
-    postRequest,
     deleteRequest,
-    patchRequest
+    patchRequest,
+    postRequest
 }

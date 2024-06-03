@@ -56,7 +56,8 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.use(cors({
-    origin: '*'
+    origin: '*',
+    //methods: ["GET","POST","PATCH","DELETE"]
 }));
 
 app.use(express.json());
@@ -64,7 +65,7 @@ app.use("/bouquet", bouquetRoutes);
 app.use("/cadeau", cadeauRoutes);
 app.use("/evenement", evenementRoutes)
 app.use("/salondethe", salondetheRoutes)
-app.use("/users", userRoutes)
+app.use("/user", userRoutes)
 //app.use("/auth", authRoutes)
 
 
