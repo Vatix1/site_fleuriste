@@ -26,7 +26,9 @@ exports.updateArticle = (req,res) => {
     let id_article = req.body.id_article;
     let nom_article = req.body.nom_article;
     let prix_article = req.body.prix_article;
-    salondetheService.updateArticle(id_article,nom_article,prix_article,(error,data) => {
+    let id_type_article = req.body.id_type_article;
+    console.log('upArticle',id_article,nom_article,prix_article,id_type_article);
+    salondetheService.updateArticle(id_article,nom_article,prix_article,id_type_article,(error,data) => {
         if(error){
             return res.status(500).send("error");
         }

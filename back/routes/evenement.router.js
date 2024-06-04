@@ -2,6 +2,11 @@ const express = require('express');
 let router = express.Router();
 const evenementController = require('../controllers/evenement.controller')
 
+router.use((req, res, next) => {
+    console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
+    next();
+});
+
 /**
  * @swagger
  * tags:
@@ -116,6 +121,6 @@ router.delete("/deleteEvenement", evenementController.deleteEvenement);
  *       500:
  *         description: Internal error
  */
-router.post("/updateEvenement", evenementController.updateEvenement);
+router.patch("/updateEvenement", evenementController.updateEvenement);
 
 module.exports = router;

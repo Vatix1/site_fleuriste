@@ -18,8 +18,9 @@
                         <label for="nom">Nom</label>
                         <input type="text" class="form-control" id="newTypeArticleName" required v-model="newTypeArticleName">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewTypeArticle">Ajouter</button>
+                    
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewTypeArticle(newTypeArticleName)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -54,13 +55,13 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select class="form-control" id="newArticleType" v-model="selectedTypeId[type.id_article]">
-                            <option v-for="(type, typeIndex) in type_articles" :key="typeIndex" :value="type.id">{{ type.nom }}</option>
+                        <select class="form-control" id="newArticleType" v-model="selectedTypeId">
+                            <option v-for="(type, typeIndex) in type_articles" :key="typeIndex" :value="type.id_type_article">{{ type.nom }}</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" @click="createNewArticle">Ajouter</button>
                     </form>
+                    <button class="btn btn-primary" @click="createNewArticle(newArticleName,newArticlePrix)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -77,7 +78,9 @@
                 <h3>Type d'article</h3>
                 <p>{{ article.nom_type_article }}</p>
                 <select name="type-article" v-model="selectedTypeIdsArticle[article.id_article]">
-                <option v-for="(type, typeIndex) in type_articles" :key="typeIndex" :value="type.id">{{ type.nom_type_article }}</option>
+                    <option v-for="(type, typeIndex) in type_articles" :key="typeIndex" :value="type.id_type_article">
+                        {{ type.nom_type_article }}
+                    </option>
                 </select>
                 <hr>
             </div>
@@ -90,7 +93,7 @@
     </div>
 </template>
 <script>
-import { getAllArticle, updateArticle, addArticle, deleteArticle, getAllTypeArticle, updateTypeArticle, createTypeArticle, deleteTypeArticle} from '@/services/salondethe.services';
+import { getAllArticle, updateArticle, deleteArticle, getAllTypeArticle, updateTypeArticle, createTypeArticle, deleteTypeArticle, createArticle} from '@/services/salondethe.services';
 
 
 export default {
@@ -105,7 +108,8 @@ export default {
         showAddArticle: false,
         showAddTypeArticle: false,
         selectedTypeId: {},
-        selectedTypeIdsArticle: {}
+        selectedTypeIdsArticle: {},
+        newTypeArticleName:'',
       };
     },
     async mounted() {
@@ -126,16 +130,21 @@ export default {
         toggleAddTypeArticle() {
             this.showAddTypeArticle = !this.showAddTypeArticle;
         },
-        async addArticle(addArticleName,addArticlePrix,addIdTypeArticle) {
+        async createNewArticle(addArticleName,addArticlePrix,addIdTypeArticle = "") {
             let data = {
                 nom_article: addArticleName,
                 prix_article: addArticlePrix,
                 id_type_article: addIdTypeArticle
             }
-            await addArticle(data);
+            await createArticle(data);
+            location.reload();
         },
         async createNewTypeArticle(newTypeArticleName) {
-            await createTypeArticle(newTypeArticleName)
+            let data = {
+                nom_type_article: newTypeArticleName
+            }
+            await createTypeArticle(data)
+            location.reload();
         }, 
 
         async updateArticle(id_article,nom_article,prix_article){
@@ -147,6 +156,7 @@ export default {
                 id_type_article: selectedTypeIds
             }
             await updateArticle(data);
+            alert("Article modifié")
         },
         async updateTypeArticle(id_type_article,nom_type_article){
             let data = {
@@ -157,6 +167,7 @@ export default {
         },
         async deleteArticle(id_article){
             await deleteArticle(id_article)
+            location.reload();
         },
         async deleteTypeArticle(id_type_article){
             await deleteTypeArticle(id_type_article)

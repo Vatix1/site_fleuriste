@@ -1,7 +1,7 @@
-import { getRequest, postRequest, deleteRequest,patchRequest } from "./axios.services";
+import { get, post, del,patch } from "./axios.services";
 
 async function getAllEvenementFromAPI(){
-    return getRequest('/evenement/getAllEvenement', 'getAllEvenement')
+    return get('/evenement/getAllEvenement', 'getAllEvenement')
 }
 
 async function getAllEvenement(){
@@ -10,7 +10,7 @@ async function getAllEvenement(){
 }
 
 async function deleteEvenementFromAPI(id){
-    return deleteRequest('/evenement/deleteEvenement?id='+id, 'deleteEvenement')
+    return del('/evenement/deleteEvenement?id='+id, 'deleteEvenement')
 }
 
 async function deleteEvenement(id){
@@ -20,7 +20,7 @@ async function deleteEvenement(id){
 
 async function createEvenementFromAPI(data){
     console.log('event',data);
-    return postRequest('/evenement/createEvenement',data,'createEvenement')
+    return post('/evenement/createEvenement',data,'createEvenement')
 }
 
 async function createEvenement(data){
@@ -30,7 +30,7 @@ async function createEvenement(data){
 }
 
 async function updateEvenementFromAPI(data){
-    return patchRequest('/evenement/updateEvenement',data,'updateEvenement')
+    return patch('/evenement/updateEvenement',data,'updateEvenement')
 }
 
 async function updateEvenement(data){
@@ -39,7 +39,7 @@ async function updateEvenement(data){
 }
 
 async function getAllPhotoFromAPI(){
-    return getRequest('/evenement/getAllEvenement', 'getAllEvenement')
+    return get('/evenement/getAllEvenement', 'getAllEvenement')
 }
 
 async function getAllPhoto(){
@@ -48,7 +48,7 @@ async function getAllPhoto(){
 }
 
 async function deletePhotoFromAPI(id){
-    return deleteRequest('/evenement/deleteEvenement?id='+id, 'deleteEvenement')
+    return del('/evenement/deleteEvenement?id='+id, 'deleteEvenement')
 }
 
 async function deletePhoto(id){
@@ -57,7 +57,7 @@ async function deletePhoto(id){
 }
 
 async function createPhotoFromAPI(data){
-    return postRequest('/evenement/addEvenement',data,'addEvenement')
+    return post('/evenement/addEvenement',data,'addEvenement')
 }
 
 async function createPhoto(data){
@@ -66,7 +66,7 @@ async function createPhoto(data){
 }
 
 async function updatePhotoFromAPI(data){
-    return patchRequest('/evenement/updateEvenement',data,'updateEvenement')
+    return patch('/evenement/updateEvenement',data,'updateEvenement')
 }
 
 async function updatePhoto(data){

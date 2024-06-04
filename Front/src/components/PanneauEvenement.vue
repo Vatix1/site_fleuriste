@@ -18,8 +18,8 @@
                         <label for="nom">Nom</label>
                         <input type="text" class="form-control" id="newEvenementName" required v-model="newEvenementName">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewEvenement(newEvenementName)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewEvenement(newEvenementName)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -113,16 +113,18 @@ export default {
             return await getAllPhoto();
         },
         async updateEvenement(nom_evenement){
-            await updateEvenement(nom_evenement)
+            await updateEvenement(nom_evenement);
         },
         async supprimerEvenement(id_evenement){
             await deleteEvenement(id_evenement);
+            location.reload();
         },
         async createNewEvenement(newEvenementName) {
             let data = {
                 nom_evenement: newEvenementName
             }
             await createEvenement(data);
+            location.reload();
         }
 
     }

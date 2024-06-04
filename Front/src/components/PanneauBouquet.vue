@@ -30,8 +30,8 @@
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="newBouquetImage">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription,newBouquetImage)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription,newBouquetImage)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -75,6 +75,10 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
       return {
         bouquets: [],
         showAddBouquet: false,
+        newBouquetName: '',
+        newBouquetPrix: 0,
+        newBouquetDescription:"",
+        newBouquetImage: "",
       };
     },
     async mounted() {
@@ -97,18 +101,21 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
             }
             console.log("bouquet", data);
             await createBouquet(data);
+            location.reload();
         },
-        async updateBouquet(id) {
+        async updateBouquet(id, nom, prix, description) {
             const data = {
                 id_bouquet: id,
-                nom_bouquet: this.updateBouquetName ,
-                prix_bouquet: this.updateBouquetPrix,
-                description: this.updateBouquetDescription,
+                nom_bouquet: nom ,
+                prix_bouquet: prix ,
+                description: description,
             }
             await updateBouquet(data)
+            alert("Bouquet Modifié")
         },
         async deleteBouquet(id) {
             await deleteBouquet(id)
+            location.reload();
         }
     }
 }

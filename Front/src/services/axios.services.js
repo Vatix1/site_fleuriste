@@ -1,3 +1,4 @@
+/*
 import axios from 'axios'
 
 const axiosAgent = axios.create({
@@ -83,3 +84,40 @@ export {
     patchRequest,
     postRequest
 }
+*/
+
+// axios.service.js
+import axios from 'axios';
+
+const instance = axios.create({
+    baseURL: 'http://localhost:3000/',
+});
+
+instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const { response } = error;
+
+        if (response) {
+            // La requête a été faite, mais le serveur a répondu avec un code d'erreur
+            console.error('Axios Error:', response.status, response.data);
+        } else if (error.request) {
+            // La requête a été faite, mais aucune réponse n'a été reçue
+            console.error('Axios Error: No response received');
+        } else {
+            // La requête n'a même pas pu être faite (ex: problème de connexion)
+            console.error('Axios Error: Request failed before sending');
+        }
+
+        return Promise.reject(error);
+    }
+);
+
+// Méthodes générales pour les requêtes GET, POST, PUT, PATCH, DEL
+export const get = (url, config) => instance.get(url, config);
+export const post = (url, data, config) => instance.post(url, data, config);
+export const put = (url, data, config) => instance.put(url, data, config);
+export const patch = (url, data, config) => instance.patch(url, data, config);
+export const del = (url, data, config) => instance.delete(url, data, config)
+
+export default instance;

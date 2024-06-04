@@ -1,12 +1,9 @@
-import { deleteRequest, getRequest, patchRequest, postRequest } from "./axios.services";
+import { del, get, patch, post } from "./axios.services";
 //import authHeader from "./auth-header";
 
-async function testPost(){
-    return postRequest('/user/testPost', 'testPost')
-}
 
 async function getAllUsersFromAPI(){
-    return getRequest('/user/getAllUsers', getAllUsers)
+    return get('/user/getAllUsers', getAllUsers)
 }
 
 async function getAllUsers() {
@@ -15,7 +12,7 @@ async function getAllUsers() {
 }
 
 async function getAllRolesFromAPI() {
-    return getRequest('/user/getAllRoles', getAllRoles)
+    return get('/user/getAllRoles', getAllRoles)
 }
 
 async function getAllRoles() {
@@ -24,7 +21,8 @@ async function getAllRoles() {
 }
 
 async function updateUtilisateurFromAPI(data) {
-    return patchRequest('/user/updateUtilisateur',data, updateUtilisateur)
+    console.log('user',data)
+    return patch('/user/updateUtilisateur',data, updateUtilisateur)
 }
 
 async function updateUtilisateur(data) {
@@ -33,7 +31,7 @@ async function updateUtilisateur(data) {
 }
 
 async function deleteUtilisateurFromAPI(id) {
-    return deleteRequest('/user/deleteUtilisateur?id='+id, deleteUtilisateur)
+    return del('/user/deleteUtilisateur?id='+id, deleteUtilisateur)
 }
 
 async function deleteUtilisateur(id) {
@@ -44,7 +42,7 @@ async function deleteUtilisateur(id) {
 
 async function createUtilisateurFromAPI(data) {
     console.log('pass',data);
-    return postRequest('/user/createUtilisateur',data, 'createUtilisateur')
+    return post('/user/createUtilisateur',data, 'createUtilisateur')
 }
 
 async function createUtilisateur(data) {
@@ -60,7 +58,7 @@ async function loginFromAPI(user) {
         mot_de_passe: user.password
     }
     console.log('pass 2', data);
-    return postRequest('/user/signin',data,'signin')
+    return post('/user/signin',data,'signin')
 }
 
 async function login (user) {
@@ -76,7 +74,7 @@ async function logout() {
 }
 /*
 register(user) {
-    return postRequest('auth/signup', {
+    return post('auth/signup', {
         nom_utilisateur: user.nom_utilisateur,
         email: user.email,
         mot_de_passe: user.mot_de_passe
@@ -85,15 +83,15 @@ register(user) {
 */
 /*
 async function getUserProfile() {
-    return getRequest( '/user/getProfileUser', { headers: authHeader() });
+    return get( '/user/getProfileUser', { headers: authHeader() });
 }
 
 async function getModProfile() {
-    return getRequest( '/user/getProfileMod', { headers: authHeader() });
+    return get( '/user/getProfileMod', { headers: authHeader() });
 }
 
 async function getAdminProfile() {
-    return getRequest( '/user/getProfileAdmin', {headers: authHeader() });
+    return get( '/user/getProfileAdmin', {headers: authHeader() });
 }
 */
 
@@ -105,7 +103,6 @@ export{
     createUtilisateur,
     login,
     logout,
-    testPost
 }
 
 

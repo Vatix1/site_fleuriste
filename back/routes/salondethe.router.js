@@ -2,6 +2,11 @@ const express = require('express');
 let router = express.Router();
 const salondetheController = require('../controllers/salonDeThe.controller')
 
+router.use((req, res, next) => {
+    console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
+    next();
+});
+
 /**
  * @swagger
  * tags:
@@ -103,7 +108,7 @@ router.delete("/deleteArticle", salondetheController.deleteArticle);
 /**
  * @swagger
  * /salondethe/updateArticle:
- *   post:
+ *   patch:
  *     tags: [Article]
  *     summary: modifier un article
  *     requestBody:
@@ -115,6 +120,7 @@ router.delete("/deleteArticle", salondetheController.deleteArticle);
  *               - id_article
  *               - nom_article
  *               - prix_article
+ *               - id_type_article
  *             properties:
  *               id_article:
  *                 type: integer
@@ -122,13 +128,15 @@ router.delete("/deleteArticle", salondetheController.deleteArticle);
  *                 type: string
  *               prix_article:
  *                 type: number
+ *               id_type_article:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: article modifier avec succes
  *       500:
  *         description: Internal error
  */
-router.post("/updateArticle", salondetheController.updateArticle);
+router.patch("/updateArticle", salondetheController.updateArticle);
 
 /**
  * @swagger

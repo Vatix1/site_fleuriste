@@ -41,10 +41,10 @@ const createBouquet = (nom_bouquet,prix_bouquet,description,image_bouquet,callba
     });
 }
 
-async function updateBouquetAsync(id_bouquet,nom_bouquet,prix_bouquet) {
+async function updateBouquetAsync(id_bouquet,nom_bouquet,prix_bouquet,description) {
     try {
         const conn = await pool.connect();
-        await conn.query("UPDATE bouquet SET nom_bouquet=$2 , prix_bouquet=$3 WHERE id_bouquet=$1;", [id_bouquet,nom_bouquet,prix_bouquet]);
+        await conn.query("UPDATE bouquet SET nom_bouquet=$2 , prix_bouquet=$3, description=$4 WHERE id_bouquet=$1;", [id_bouquet,nom_bouquet,prix_bouquet,description]);
         conn.release();
     } catch (error) {
         console.error('Error in updateBouquetAsync :', error);
@@ -52,8 +52,8 @@ async function updateBouquetAsync(id_bouquet,nom_bouquet,prix_bouquet) {
     }
 }
 
-const updateBouquet = (id_bouquet,nom_bouquet,prix_bouquet,callback) => {
-    updateBouquetAsync(id_bouquet,nom_bouquet,prix_bouquet).then(res => {
+const updateBouquet = (id_bouquet,nom_bouquet,prix_bouquet,description,callback) => {
+    updateBouquetAsync(id_bouquet,nom_bouquet,prix_bouquet,description).then(res => {
         callback(null,res)
     }).catch(error => {
         console.log(error);

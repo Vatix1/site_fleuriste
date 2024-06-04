@@ -28,7 +28,8 @@ exports.updateBouquet = (req,res) => {
     let id_bouquet = req.body.id_bouquet;
     let nom_bouquet = req.body.nom_bouquet;
     let prix_bouquet = req.body.prix_bouquet;
-    bouquetService.updateBouquet(id_bouquet,nom_bouquet,prix_bouquet,(error,data) => {
+    let description = req.body.description;
+    bouquetService.updateBouquet(id_bouquet,nom_bouquet,prix_bouquet,description,(error,data) => {
         if(error){
             return res.status(500).send("error");
         }

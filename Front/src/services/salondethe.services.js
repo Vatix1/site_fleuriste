@@ -1,7 +1,7 @@
-import { getRequest, postRequest, deleteRequest, patchRequest } from "./axios.services";
+import { get, post, del, patch } from "./axios.services";
 
 async function getAllArticleFromAPI(){
-    return getRequest('/salondethe/getAllArticle','getAllArticle')
+    return get('/salondethe/getAllArticle','getAllArticle')
 }
 
 async function getAllArticle(){
@@ -10,7 +10,7 @@ async function getAllArticle(){
 }
 
 async function deleteArticleFromAPI(id){
-    return deleteRequest('/salondethe/deleteArticle?id='+id, 'deleteArticle')
+    return del('/salondethe/deleteArticle?id='+id, 'deleteArticle')
 }
 
 async function deleteArticle(id){
@@ -18,26 +18,28 @@ async function deleteArticle(id){
     return anwser;
 }
 
-async function addArticleFromAPI(data){
-    return postRequest('/salondethe/addArticle',data,'addArticle')
+async function createArticleFromAPI(data){
+    console.log("article",data)
+    return post('/salondethe/createArticle',data,'createArticle')
 }
 
-async function addArticle(data){
-    let anwser = await addArticleFromAPI(data)
+async function createArticle(data){
+    let anwser = await createArticleFromAPI(data)
     return anwser;
 }
 
 async function updateArticleFromAPI(data){
-    return patchRequest('/salondethe/updateArticle',data,'updateArticle')
+    return patch('/salondethe/updateArticle',data,'updateArticle')
 }
 
 async function updateArticle(data){
+    console.log("serv", data);
     let anwser = await updateArticleFromAPI(data)
     return anwser;
 }
 
 async function getAllTypeArticleFromAPI() {
-    return getRequest('/salondethe/getAllTypeArticle','getAllTypeArticle')
+    return get('/salondethe/getAllTypeArticle','getAllTypeArticle')
 }
 
 async function getAllTypeArticle() {
@@ -47,7 +49,7 @@ async function getAllTypeArticle() {
 
 async function createTypeArticleFromAPI(data) {
     console.log('sdt',data);
-    return postRequest('/salondethe/createTypeArticle',data,'createTypeArticle')
+    return post('/salondethe/createTypeArticle',data,'createTypeArticle')
 }
 
 async function createTypeArticle(data) {
@@ -57,7 +59,7 @@ async function createTypeArticle(data) {
 }
 
 async function updateTypeArticleFromAPI(data) {
-    return patchRequest('/salondethe/updateTypeArticle',data,'updateTypeArticle')
+    return patch('/salondethe/updateTypeArticle',data,'updateTypeArticle')
 }
 
 async function updateTypeArticle(data) {
@@ -66,7 +68,7 @@ async function updateTypeArticle(data) {
 }
 
 async function deleteTypeArticleFromAPI(id) {
-    return deleteRequest('/salondethe/deleteTypeArticle?id='+id, 'deleteTypeArticle')
+    return del('/salondethe/deleteTypeArticle?id='+id, 'deleteTypeArticle')
 }
 
 async function deleteTypeArticle(data){
@@ -78,7 +80,7 @@ export {
     getAllArticle,
     deleteArticle,
     updateArticle,
-    addArticle,
+    createArticle,
     getAllTypeArticle,
     createTypeArticle,
     updateTypeArticle,

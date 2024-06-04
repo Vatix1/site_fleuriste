@@ -22,8 +22,8 @@
                         <label for="nom">Mot de passe</label>
                         <input type="text" class="form-control" id="newUtilisateurMDP" required v-model="newUtilisateurMDP">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewUtilisateur(newUtilisateurName,newUtilisateurMDP)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewUtilisateur(newUtilisateurName,newUtilisateurMDP)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -56,15 +56,11 @@
           </tr>
         </tbody>
       </table>
-      <div>
-        <button @click="testPostFunc"></button>
-        <p>{{ testPost }}</p>
-      </div>
     </div>
   </template>
   
   <script>
-  import { getAllUsers, getAllRoles, updateUtilisateur, createUtilisateur, deleteUtilisateur, testPost } from '@/services/users.services'
+  import { getAllUsers, getAllRoles, updateUtilisateur, createUtilisateur, deleteUtilisateur } from '@/services/users.services'
   
   export default {
     name: "PanneauUtilisateur",
@@ -86,10 +82,7 @@
     },
   
     methods: {
-        async testPostFunc() {
-          console.log(testPost());
-          this.testPost = await testPost();
-        },
+        
         async getUtilisateur() {
             return await getAllUsers();
         },
@@ -112,11 +105,10 @@
                 nom_utilisateur: nom_utilisateur,
                 mot_de_passe: mot_de_passe
             }
-            console.log(data);
             await createUtilisateur(data)
+            location.reload();
         },
         async supprimerUtilisateur(id_utilisateur) {
-          console.log('supp',id_utilisateur);
           await deleteUtilisateur(id_utilisateur)
           location.reload();
         }

@@ -2,6 +2,11 @@ const express = require('express');
 let router = express.Router();
 const cadeauController = require('../controllers/cadeau.controller')
 
+router.use((req, res, next) => {
+    console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
+    next();
+});
+
 /**
  * @swagger
  * tags:

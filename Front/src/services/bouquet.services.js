@@ -1,7 +1,9 @@
-import { getRequest, postRequest, deleteRequest, patchRequest } from "./axios.services";
+import { get, post, del, patch } from "./axios.services";
+
+
 
 async function getAllBouquetFromAPI(){
-    return getRequest('/bouquet/getAllBouquet', 'getAllBouquet')
+    return get('/bouquet/getAllBouquet', 'getAllBouquet')
 }
 
 async function getAllBouquet(){
@@ -11,7 +13,7 @@ async function getAllBouquet(){
 
 async function deleteBouquetFromAPI(id){
     console.log("del boquet",id)
-    return deleteRequest('/bouquet/deleteBouquet?id='+id, 'deleteBouquet')
+    return del('/bouquet/deleteBouquet?id='+id, 'deleteBouquet')
 }
 
 async function deleteBouquet(id){
@@ -22,7 +24,7 @@ async function deleteBouquet(id){
 async function createBouquet(data){
     console.log("pass",data);
     try {
-        const response = await postRequest('/bouquet/createBouquet',data);
+        const response = await post('/bouquet/createBouquet',data);
         console.log(response);
         return response;
     } catch (error) {
@@ -32,7 +34,8 @@ async function createBouquet(data){
 }
 
 async function updateBouquetFromAPI(data){
-    return patchRequest('/bouquet/updateBouquet',data,'updateBouquet')
+    console.log("up",data)
+    return patch('/bouquet/updateBouquet',data,'updateBouquet')
 }
 
 async function updateBouquet(data){
@@ -46,3 +49,21 @@ export {
     createBouquet,
     updateBouquet,
 }
+/*
+import axios from 'axios';
+
+const url = axios.create({
+    baseURL: 'http://localhost:3000/',
+});
+
+async function getAllBouquet() {
+    console.log("getBouquet",data);
+    try {
+        const response = await axios.get(url + "/bouquet/getAllBouquet");
+        console.log(response);
+        return response.data
+    } catch(error) {
+        console.error(error);
+    }
+}
+*/

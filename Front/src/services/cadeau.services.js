@@ -1,8 +1,8 @@
-import { getRequest, postRequest, deleteRequest,patchRequest } from "./axios.services";
+import { get, post, del,patch } from "./axios.services";
 
 
 async function getAllBougieFromAPI(){
-    return getRequest('/cadeau/getAllBougie', 'getAllBougie')
+    return get('/cadeau/getAllBougie', 'getAllBougie')
 }
 
 async function getAllBougie(){
@@ -11,7 +11,7 @@ async function getAllBougie(){
 }
 
 async function deleteBougieFromAPI(id){
-    return deleteRequest('/cadeau/deleteBougie?id='+id, 'deleteBougie')
+    return del('/cadeau/deleteBougie?id='+id, 'deleteBougie')
 }
 
 async function deleteBougie(id){
@@ -19,18 +19,18 @@ async function deleteBougie(id){
     return anwser;
 }
 
-async function addBougieFromAPI(data){
+async function createBougieFromAPI(data){
     console.log('bougie',data);
-    return postRequest('/cadeau/addBougie',data,'addBougie')
+    return post('/cadeau/createBougie',data,'createBougie')
 }
 
-async function addBougie(data){
-    let anwser = await addBougieFromAPI(data)
+async function createBougie(data){
+    let anwser = await createBougieFromAPI(data)
     return anwser;
 }
 
 async function updateBougieFromAPI(data){
-    return patchRequest('/cadeau/updateBougie',data,'updateBougie')
+    return patch('/cadeau/updateBougie',data,'updateBougie')
 }
 
 async function updateBougie(data){
@@ -39,7 +39,7 @@ async function updateBougie(data){
 }
 
 async function getAllTheFromAPI(){
-    return getRequest('/cadeau/getAllThe', 'getAllThe')
+    return get('/cadeau/getAllThe', 'getAllThe')
 }
 
 async function getAllThe(){
@@ -48,7 +48,7 @@ async function getAllThe(){
 }
 
 async function deleteTheFromAPI(id){
-    return deleteRequest('/cadeau/deleteThe?id='+id, 'deleteThe')
+    return del('/cadeau/deleteThe?id='+id, 'deleteThe')
 }
 
 async function deleteThe(id){
@@ -56,18 +56,18 @@ async function deleteThe(id){
     return anwser;
 }
 
-async function addTheFromAPI(data){
+async function createTheFromAPI(data){
     console.log('the', data);
-    return postRequest('/cadeau/addThe',data,'addThe')
+    return post('/cadeau/createThe',data,'createThe')
 }
 
-async function addThe(data){
-    let anwser = await addTheFromAPI(data)
+async function createThe(data){
+    let anwser = await createTheFromAPI(data)
     return anwser;
 }
 
 async function updateTheFromAPI(data){
-    return patchRequest('/cadeau/updateThe',data,'updateThe')
+    return patch('/cadeau/updateThe',data,'updateThe')
 }
 
 async function updateThe(data){
@@ -76,7 +76,7 @@ async function updateThe(data){
 }
 
 async function getAllFormuleFromAPI(){
-    return getRequest('/cadeau/getAllFormule', 'getAllFormule')
+    return get('/cadeau/getAllFormule', 'getAllFormule')
 }
 
 async function getAllFormule(){
@@ -85,7 +85,7 @@ async function getAllFormule(){
 }
 
 async function deleteFormuleFromAPI(id){
-    return deleteRequest('/cadeau/deleteFormule?id='+id, 'deleteFormule')
+    return del('/cadeau/deleteFormule?id='+id, 'deleteFormule')
 }
 
 async function deleteFormule(id){
@@ -93,18 +93,18 @@ async function deleteFormule(id){
     return anwser;
 }
 
-async function addFormuleFromAPI(data){
+async function createFormuleFromAPI(data){
     console.log('formule',data);
-    return postRequest('/cadeau/addFormule',data,'addFormule')
+    return post('/cadeau/createFormule',data,'createFormule')
 }
 
-async function addFormule(data){
-    let anwser = await addFormuleFromAPI(data)
+async function createFormule(data){
+    let anwser = await createFormuleFromAPI(data)
     return anwser;
 }
 
 async function updateFormuleFromAPI(data){
-    return patchRequest('/cadeau/updateFormule',data,'updateFormule')
+    return patch('/cadeau/updateFormule',data,'updateFormule')
 }
 
 async function updateFormule(data){
@@ -115,14 +115,14 @@ async function updateFormule(data){
 export {
     getAllBougie,
     deleteBougie,
-    addBougie,
+    createBougie,
     updateBougie,
     getAllThe,
     deleteThe,
-    addThe,
+    createThe,
     updateThe,
     getAllFormule,
     deleteFormule,
-    addFormule,
+    createFormule,
     updateFormule
 }

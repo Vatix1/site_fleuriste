@@ -42,10 +42,10 @@ const createArticle = (nom_article,prix_article,callback) => {
     });
 }
 
-async function updateArticleAsync(id_article,nom_article,prix_article) {
+async function updateArticleAsync(id_article,nom_article,prix_article,id_type_article) {
     try {
         const conn = await pool.connect();
-        const result = await conn.query("UPDATE article SET nom_article=$2 , prix_article=$3 WHERE id_article=$1;", [id_article,nom_article,prix_article]);
+        const result = await conn.query("UPDATE article SET nom_article=$2, prix_article=$3, id_type_article=$4 WHERE id_article=$1;", [id_article,nom_article,prix_article,id_type_article]);
         conn.release();
     } catch (error) {
         console.error('Error in updateArticleAsync :', error);
@@ -53,8 +53,8 @@ async function updateArticleAsync(id_article,nom_article,prix_article) {
     }
 }
 
-const updateArticle = (id_article,nom_article,prix_article,callback) => {
-    updateArticleAsync(id_article,nom_article,prix_article).then(res => {
+const updateArticle = (id_article,nom_article,prix_article,id_type_article,callback) => {
+    updateArticleAsync(id_article,nom_article,prix_article,id_type_article).then(res => {
         callback(null,res)
     }).catch(error => {
         console.log(error);

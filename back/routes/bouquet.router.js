@@ -2,6 +2,11 @@ const express = require('express');
 let router = express.Router();
 const bouquetController = require('../controllers/bouquet.controller')
 
+router.use((req, res, next) => {
+    console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
+    next();
+});
+
 /**
  * @swagger
  * tags:
@@ -120,6 +125,6 @@ router.delete("/deleteBouquet", bouquetController.deleteBouquet);
  *       500:
  *         description: Internal error
  */
-router.post("/updateBouquet", bouquetController.updateBouquet);
+router.patch("/updateBouquet", bouquetController.updateBouquet);
 
 module.exports = router;

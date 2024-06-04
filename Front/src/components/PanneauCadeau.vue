@@ -26,8 +26,8 @@
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="newBougieImage">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewBougie(newBougieName,newBougiePrix,newBougieImage)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewBougie(newBougieName,newBougiePrix,newBougieImage)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -73,8 +73,8 @@
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="newTheImage">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewThe(newTheName,newThePrix,newTheImage)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewThe(newTheName,newThePrix,newTheImage)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -119,8 +119,8 @@
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="newFormuleImage">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="createNewFormule(newFormuleName,newFormulePrix)">Ajouter</button>
                     </form>
+                    <button type="submit" class="btn btn-primary" @click="createNewFormule(newFormuleName,newFormulePrix)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -149,8 +149,8 @@
 </template>
   
 <script>
-import { getAllBougie, deleteBougie, addBougie, updateBougie, getAllThe, deleteThe, addThe, updateThe,
-    getAllFormule, deleteFormule, addFormule, updateFormule  } from "../services/cadeau.services";
+import { getAllBougie, deleteBougie, createBougie, updateBougie, getAllThe, deleteThe, createThe, updateThe,
+    getAllFormule, deleteFormule, createFormule, updateFormule  } from "../services/cadeau.services";
 
   
   export default {
@@ -198,8 +198,8 @@ import { getAllBougie, deleteBougie, addBougie, updateBougie, getAllThe, deleteT
                 prix_bougie: newBougiePrix,
                 image_bougie: newBougieImage
             }
-            console.log("bougie", data);
-            await addBougie(data);
+            await createBougie(data);
+            location.reload();
         },
         async createNewThe(newTheName,newThePrix,newTheImage = ''){
             const data = {
@@ -207,8 +207,8 @@ import { getAllBougie, deleteBougie, addBougie, updateBougie, getAllThe, deleteT
                 prix_the: newThePrix,
                 image_the: newTheImage
             }
-            console.log("the", data);
-            await addThe(data);
+            await createThe(data);
+            location.reload();
         },
         async createNewFormule(newFormuleName,newFormulePrix,newFormuleImage = ''){
             const data = {
@@ -216,8 +216,8 @@ import { getAllBougie, deleteBougie, addBougie, updateBougie, getAllThe, deleteT
                 prix_formule: newFormulePrix,
                 image_formule: newFormuleImage
             }
-            console.log("formule", data);
-            await addFormule(data);
+            await createFormule(data);
+            location.reload();
         },
         async updateBougie(id_bougie, nom_bougie, prix_bougie) {
             const data = {
@@ -245,12 +245,15 @@ import { getAllBougie, deleteBougie, addBougie, updateBougie, getAllThe, deleteT
         },
         async deleteBougie(id_bougie) {
             await deleteBougie(id_bougie);
+            location.reload();
         },
         async deleteThe(id_the){
             await deleteThe(id_the)
+            location.reload();
         },
         async deleteFormule(id_formule){
             await deleteFormule(id_formule)
+            location.reload();
         }
     }
 }

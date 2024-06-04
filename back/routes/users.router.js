@@ -2,6 +2,10 @@ const express = require('express');
 let router = express.Router();
 const userController = require('../controllers/users.controller')
 
+router.use((req, res, next) => {
+    console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
+    next();
+  });
 /**
  * @swagger
  * tags:
@@ -169,6 +173,5 @@ router.post(
 
 router.post("/signin", userController.signin);
 
-router.post("/testPost",userController.testPost)
 
 module.exports = router;

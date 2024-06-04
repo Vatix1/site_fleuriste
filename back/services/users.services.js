@@ -1,3 +1,4 @@
+const { getUserByName } = require("controllers/users.controller");
 const pool = require("../database/db")
 
 async function getAllUsersAsync() {
@@ -105,10 +106,39 @@ const createUtilisateur = (nom_utilisateur, mot_de_passe, callback) => {
     })
 }
 
+async function getUserByNameAsync(nom_utilisateur) {
+    try {
+        const conn = await pool.connect();
+        const result = await conn.query("SELECT * FROM Utilisateur WHERE nom_utilisateur=$1;",[nom_utilisateur])
+        conn.release();
+        return result.rows;
+    } catch(error) {
+        console.error("Error in getUserByName :", error);
+    }
+}
+
+const getUserByName = (nom_utilisateur, callback) => {
+    getUserByNameAsync(nom_utilisateur).then(res => {
+        callback(null, res);
+    }).catch(error => {
+        console.log(error);
+        callback(error,null);
+    })
+}
+
+async function getRoleByUser(id_utilisateur) {
+    try {
+        const conn = await pool.connect();
+        const result = await conn.query("SELECT id_role FROM Utilisateur WHERE id_utilisateur=$1;",[id_utilisateur])
+        
+    }
+}
+
 module.exports = {
     getAllUsers: getAllUsers,
     getAllRoles: getAllRoles,
     updateUtilisateur: updateUtilisateur,
     deleteUtilisateur: deleteUtilisateur,
-    createUtilisateur: createUtilisateur
+    createUtilisateur: createUtilisateur,
+    getUserByName: getUserByName,
 }

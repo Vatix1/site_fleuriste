@@ -1,10 +1,5 @@
 const usersService = require("../services/users.services")
 
-exports.testPost = (req, res) => {
-    console.log('je passe')
-    res.send("Test Post")
-}
-
 exports.getAllUsers = (req,res) => {
     usersService.getAllUsers((error, data) => {
         if(error){
@@ -67,7 +62,7 @@ exports.deleteUtilisateur = (req, res) => {
 
 exports.createUtilisateur = (req,res) => {
     let nom_utilisateur = req.body.nom_utilisateur
-    let mot_de_passe = req.body.mot_de_passe
+    let mot_de_passe = bcrypt.hashSync(req.body.mot_de_passe, 8)
     console.log('controller', nom_utilisateur,mot_de_passe);
     usersService.createUtilisateur(nom_utilisateur,mot_de_passe,(error,data) => {
         if(error) {
@@ -96,7 +91,7 @@ exports.signup = (req,res) => {
 */
 exports.signin = (req,res) => {
     let nom_utilisateur = req.body.nom_utilisateur;
-    usersServices.getUserByName(nom_utilisateur,(error,data) => {
+    usersService.getUserByName(nom_utilisateur,(error,data) => {
         if(!error) {
             var passwordIsValid = bcrypt.compareSync(
                 req.body.mot_de_passe,
@@ -115,7 +110,7 @@ exports.signin = (req,res) => {
                     allowInsecureKeySizes: true,
                     expiresIn: 86400 // 24 hours
                 });
-            let role = usersServices.getRoleByUser(data.id_utilisateur,(error,data) => {
+            let role = usersService.getRoleByUser(data.id_utilisateur,(error,data) => {
                 if(error) {
                     return res.status(500).send(data)
                 };
