@@ -17,7 +17,7 @@ export default {
     }
 }
 */
-
+/*
 let domainUrl = "https://graph.instagram.com/me/media?"
 let fields = "fields=media_url"
 var access_token = ""
@@ -31,7 +31,7 @@ fetch(fullUrl)
             document.querySelector(".container").innerHTML += `<img src="${element.media_url}">`
         });
     })
-
+*/
 </script>
 <style scoped>
 img {

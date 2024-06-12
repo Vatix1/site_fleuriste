@@ -76,6 +76,7 @@ exports.createUtilisateur = (req,res) => {
 
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
+const config = require("../auth.config");
 /*
 exports.signup = (req,res) => {
     let nom_utilisateur = req.body.nom_utilisateur;
@@ -89,40 +90,38 @@ exports.signup = (req,res) => {
     })
 }
 */
-exports.signin = (req,res) => {
+exports.signin = (req, res) => {
     let nom_utilisateur = req.body.nom_utilisateur;
-    usersService.getUserByName(nom_utilisateur,(error,data) => {
-        if(!error) {
+    console.log("user", nom_utilisateur);
+    usersService.getUserByName(nom_utilisateur, (error, data) => {
+        console.log('user 2 ', data);
+        if (!error) {
+            console.log('yo', req.body.mot_de_passe, data[0].mot_de_passe);
             var passwordIsValid = bcrypt.compareSync(
                 req.body.mot_de_passe,
-                data.mot_de_passe
+                data[0].mot_de_passe
             );
+            console.log("pass", passwordIsValid);
             if (!passwordIsValid) {
                 return res.status(401).send({
                     accessToken: null,
                     message: "Invalid Password!"
                 });
             }
-            const token = jwt.sign({id:user.id},
-                config.secret,
-                {
-                    algorithm: 'HS256',
-                    allowInsecureKeySizes: true,
-                    expiresIn: 86400 // 24 hours
-                });
-            let role = usersService.getRoleByUser(data.id_utilisateur,(error,data) => {
-                if(error) {
-                    return res.status(500).send(data)
-                };
+            const token = jwt.sign({ id: data[0].id_utilisateur }, config.secret, {
+                algorithm: 'HS256',
+                allowInsecureKeySizes: true,
+                expiresIn: 86400 // 24 hours
             });
             res.status(200).send({
-                id: user.id,
-                nom_utilisateur: user.nom_utilisateur,
-                email: user.email,
-                roles: role,
+                id: data[0].id_utilisateur,
+                nom_utilisateur: data[0].nom_utilisateur,
+                email: data[0].email,
+                roles: data[0].id_role,
                 accessToken: token
-            });   
+            });
+        } else {
+            return res.status(500).send("error");
         }
-        return res.status(500).send("error")
-    })
-}
+    });
+};

@@ -24,19 +24,63 @@
         </div>  
       </div> 
     </div>
-    <button>bouquet</button>
-    <button>salon de the</button>
-    <button>galerie</button>
-    <button>cadeau</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" v-for="(button, index) in buttons" :key="index">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ button.title }}</h5>
+                        <a href="#" class="btn btn-primary" @click="navigateTo(button.route)">
+                            <i :class="button.icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+
 export default {
-  name: 'HelloWorld',
+  name: 'HomeView',
   props: {
     msg: String
-  }
+  },
+
+  data() {
+        return {
+            buttons: [
+                {
+                    title: 'Bouquet',
+                    icon: 'fa fa-tags',
+                    route: '/bouquet'
+                },
+                {
+                    title: 'Salon de thé',
+                    icon: 'fa fa-coffee',
+                    route: '/salondethe'
+                },
+                {
+                    title: 'Galerie',
+                    icon: 'fa fa-camera',
+                    route: '/galerie'
+                },
+                {
+                    title: 'Cadeau',
+                    icon: 'fa fa-gift',
+                    route: '/cadeau'
+                }
+            ]
+        }
+    },
+    methods: {
+        navigateTo(route) {
+            this.$router.push(route);
+        }
+    }
 }
 </script>
 

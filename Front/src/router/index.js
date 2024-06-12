@@ -18,6 +18,7 @@ import BoardAdmin from '../components/BoardAdmin.vue';
 // import BoardMod from '@/components/BoardMod.vue';
 import BoardUser from '../components/BoardUser.vue';
 import Profile from '../components/Profile.vue';
+import BoardMod from '@/components/BoardMod.vue';
 
 const routes = [
   {
@@ -101,6 +102,11 @@ const routes = [
     component: BoardAdmin
   },
   {
+    path: '/boardMod',
+    name: 'boardMod',
+    component: BoardMod
+  },
+  {
     path: '/panneauUtilisateur',
     name: 'panneauUtilisateur',
     component: PanneauUtilisateur
@@ -115,7 +121,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from,next) => {
-  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneauBouquet','/panneauEvenement','/panneauSdT','/boardAdmin','/panneauUtilisateur','/panneauCadeau'];
+  const publicPages = ['/','/login','/register','/bouquet','/galerie','/salondethe','/evenement','/cadeau','/panneauBouquet','/panneauEvenement','/panneauSdT','/boardAdmin','/panneauUtilisateur','/panneauCadeau','/boardMod'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   if(authRequired && !loggedIn){

@@ -52,17 +52,16 @@ async function createUtilisateur(data) {
 }
 
 async function loginFromAPI(user) {
-    console.log('pass', user);
     let data = {
         nom_utilisateur: user.username,
         mot_de_passe: user.password
     }
-    console.log('pass 2', data);
     return post('/user/signin',data,'signin')
 }
 
 async function login (user) {
     let anwser = await loginFromAPI(user)
+    console.log('login', anwser.data);
     if(anwser.data.accesToken) {
         localStorage.setItem('user', JSON.stringify(anwser.data))
     }

@@ -1,4 +1,3 @@
-const { getUserByName } = require("controllers/users.controller");
 const pool = require("../database/db")
 
 async function getAllUsersAsync() {
@@ -126,12 +125,26 @@ const getUserByName = (nom_utilisateur, callback) => {
     })
 }
 
-async function getRoleByUser(id_utilisateur) {
+async function getRoleByUserAsync(id_utilisateur) {
     try {
         const conn = await pool.connect();
         const result = await conn.query("SELECT id_role FROM Utilisateur WHERE id_utilisateur=$1;",[id_utilisateur])
-        
+        conn.release();
+        return result.rows
+    } catch(error) {
+        console.error("Error in getRoleByUser :", error);
     }
+}
+
+const getRoleByUser = (id_utilisateur,callback) => {
+    console.log("id serv", id_utilisateur);
+    getRoleByUserAsync(id_utilisateur).then(res => {
+        console.log('res', res);
+        callback(null, res);
+    }).catch(error => {
+        console.log(error);
+        callback(error,null)
+    })
 }
 
 module.exports = {
@@ -141,4 +154,5 @@ module.exports = {
     deleteUtilisateur: deleteUtilisateur,
     createUtilisateur: createUtilisateur,
     getUserByName: getUserByName,
+    getRoleByUser: getRoleByUser
 }

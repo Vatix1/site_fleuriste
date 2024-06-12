@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <input type="file" class="form-control-file" id="newBouquetImage">
+                        <input type="file" class="form-control-file" id="newBouquetImage" ref="newBouquetImage">
                     </div>
                     </form>
                     <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription,newBouquetImage)">Ajouter</button>
@@ -92,12 +92,13 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
         toggleAddBouquet() {
             this.showAddBouquet = !this.showAddBouquet;
         },
-        async createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription = '',newBouquetImage = ''){
+        async createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription = ''){
+            console.log('bouquet',this.$refs.newBouquetImage.files[0]);
             const data = {
                 nom_bouquet: newBouquetName,
                 prix_bouquet: newBouquetPrix,
                 description: newBouquetDescription,
-                image_bouquet: newBouquetImage
+                image_bouquet: this.$refs.newBouquetImage.files[0]
             }
             console.log("bouquet", data);
             await createBouquet(data);
