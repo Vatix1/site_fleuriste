@@ -51,7 +51,7 @@
             </div>
             <div class="image-container">
                 <hr>
-                <img :src="bouquet.image" alt="bouquet">
+                <img :src="bouquet.image_bouquet" alt="bouquet">
                 <hr>
                 <input type="file" @change="updateBouquetImage(bouquet, $event)">
             </div>

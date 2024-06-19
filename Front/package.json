@@ -17,6 +17,7 @@
     "bootstrap": "^4.6.2",
     "core-js": "^3.8.3",
     "express": "^4.19.2",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.7.1",
     "mysql": "^2.18.1",
     "node": "^18.20.2",

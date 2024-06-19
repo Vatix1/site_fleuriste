@@ -1,66 +1,98 @@
 <template>
-<nav class="navbar">
-    <div class="nav-left">
-      <div>
-        <img class="logo" src="" alt="logo fleuriste">
-      </div>
-      <div @click="showAcceuil()" class="logo-text">
-        Histoire de coeur
-      </div>
-    </div>
-    <div class="nav-center">
-      <button v-for="(text,index) in title" :key="index" @click="menuClick(index)" class="nav-button">{{ text.text }}</button>
-    </div>
-    <div class="nav-right">
+	<nav class="navbar">
+		<div class="nav-left">
+			<div>
+				<img class="logo" src="../assets/histoiredecoeurlogo.jpg" alt="logo fleuriste"
+					style="width: 40px; border-radius: 50%;" @click="showAcceuil()">
+			</div>
+		</div>
+		<div class="nav-center">
+			<button v-for="(text, index) in title" :key="index" @click="menuClick(index)" class="nav-button">{{
+						text.text
+					}}</button>
+		</div>
+		<!-- <div class="nav-right">
       <button class="login" @click="showLogin()">Connexion</button>
-    </div>
-  <component :is="currentComponent"></component>
-</nav>
+    </div> -->
+		<div class="nav-right">
+			<button v-if="!isLoggedIn" @click="showLogin">Connexion</button>
+			<button v-else @click="logout">Déconnexion</button>
+			<button v-if="isLoggedIn" @click="showProfile">Profil</button>
+		</div>
+
+
+		<component :is="currentComponent"></component>
+	</nav>
 </template>
 
 <script>
-
+import { mapActions } from 'vuex';
 
 export default {
-  name: 'AppNavbar',
+	name: 'AppNavbar',
 
-  emits: ['menuClick'],
+	emits: ['menuClick'],
 
-  props: {
-    title: {
-      type: Array,
-      required: true,
-    },
-  },
+	props: {
+		title: {
+			type: Array,
+			required: true,
+		},
+	},
 
-  components: {
-    //Login,
-  },
-  data() {
-    return {
-      isLoginActive: false,
-      isRegisterActive: false,
-      currentComponent: null,
-    };
-  },
-  methods: {
-    menuClick(index) {
-      this.$emit('menuClick', index);
-    },
+	components: {
+		//Login,
+	},
+	data() {
+		return {
+			isLoginActive: false,
+			isRegisterActive: false,
+			currentComponent: null,
+		};
+	},
+	computed: {
+		isLoggedIn() {
+			return this.$store.state.auth.status.loggedIn;
+		}
+	},
 
-    showAcceuil() {
-      const current = this.$route.name;
-      if (current !== 'home') {
-        this.$router.push('/');
-      }
-    },
-    showLogin() {
-      const current = this.$route.name;
-      if (current !== 'login') {
-        this.$router.push('/login');
-      }
-    },
-  }
+	mounted() {
+		if (this.$store.state.auth.status.loggedIn) {
+			console.log('Un utilisateur est connecté :', this.$store.state.auth.user);
+		} else {
+			console.log('Aucun utilisateur n\'est connecté');
+		}
+	},
+	methods: {
+		...mapActions('auth', ['logout']),
+
+		menuClick(index) {
+			this.$emit('menuClick', index);
+		},
+
+		showAcceuil() {
+			const current = this.$route.name;
+			if (current !== 'home') {
+				this.$router.push('/');
+			}
+		},
+		showLogin() {
+			const current = this.$route.name;
+			if (current !== 'login') {
+				this.$router.push('/login');
+			}
+		},
+		showProfile() {
+			const user = this.$store.state.auth.user;
+			if (user.roles == 3) {
+				// afficher le profil de l'utilisateur avec les fonctionnalités d'administration
+				this.$router.push('/boardAdmin');
+			} else {
+				// afficher le profil de l'utilisateur standard
+				this.$router.push('/');
+			}
+		}
+	}
 };
 </script>
 <style scoped>
@@ -83,14 +115,18 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-#nav-colors, #font-colors, #edges {
+#nav-colors,
+#font-colors,
+#edges {
 	margin-top: 10px;
+
 	.btn {
 		display: inline-block;
 		padding: 10px;
 		margin: 0 5px;
 		border: 2px solid #111111;
 		transition: 0.2s ease;
+
 		&:hover {
 			border: 2px solid white;
 		}
@@ -100,16 +136,20 @@ body {
 .navbar {
 	border: 0;
 	border-radius: 0;
-	background: linear-gradient(to right, #d4c0c0, #f3e4eb);
-	.nav li > a, .navbar-brand {
+	background: linear-gradient(to right, #837c7c, #f3e4eb);
+
+	.nav li>a,
+	.navbar-brand {
 		max-height: 50px;
 		width: auto;
 		background: transparent !important;
 		font-size: 18px;
 		transition: 0.2s ease-in-out;
-		&:hover{
-			background-color: rgba(255,255,255,0.2);
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.2);
 			font-size: 14px;
+
 			.link {
 				width: 100%;
 				padding: 0 5px 0 5px;
@@ -118,6 +158,7 @@ body {
 			}
 		}
 	}
+
 	.link {
 		width: 0;
 		font-family: 'Roboto', sans-serif;
@@ -125,26 +166,34 @@ body {
 		visibility: hidden;
 		font-size: 0px;
 	}
+
 	span {
 		color: white;
 	}
+
 	.navbar-toggle {
 		padding-right: 0;
+
 		.icon-bar {
 			background: white;
 		}
 	}
+
 	.navbar-collapse {
 		display: none;
 	}
+
 	button {
 		background: transparent;
 	}
+
 	button[type=submit] {
 		padding-right: 0;
+
 		span {
 			transition: 0.3s ease-in-out;
 		}
+
 		&:hover {
 			span {
 				transform: scale(1.3) rotate(90deg);
@@ -154,35 +203,36 @@ body {
 }
 
 .nav-right {
-  display: flex;
-  margin-right: 20px;
-  width: 25%;
-  align-items: center;
-  flex-direction: row-reverse;
+	display: flex;
+	margin-right: 20px;
+	width: 25%;
+	align-items: center;
+	flex-direction: row-reverse;
 }
+
 .nav-center {
-  display: flex;
-  align-items: center;
-  width: 60%;
-  justify-content: end;
+	display: flex;
+	align-items: center;
+	width: 60%;
+	justify-content: end;
 }
 
 .nav-button {
-  font-size: 20px;
-  width: fit-content;
-  padding-left: 15px;
-  padding-right: 15px;
-  height: 100%;
-  border: none;
-  background: none;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0);
-  transition: background-color 0.3s;
+	font-size: 20px;
+	width: fit-content;
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 100%;
+	border: none;
+	background: none;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0);
+	transition: background-color 0.3s;
 }
 
 .nav-button:hover {
-  background-color: rgba(222, 222, 222, 0.7);
-  cursor: pointer;
+	background-color: rgba(222, 222, 222, 0.7);
+	cursor: pointer;
 }
 
 @media(max-width: 769px) {
@@ -193,27 +243,33 @@ body {
 			width: 100%;
 			font-size: 14px;
 		}
+
 		.navbar-brand {
 			.link {
 				visibility: hidden;
 			}
 		}
 	}
+
 	.dropdown {
 		.dropdown-menu {
 			text-align: left !important;
 		}
 	}
+
 	button[type=submit] {
 		width: 50%;
 		float: left;
 	}
+
 	.navbar-form {
 		border: 0;
 	}
+
 	.form-group {
 		padding: 0;
 		margin: 0;
+
 		input {
 			width: 50%;
 			float: left

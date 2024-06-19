@@ -1,5 +1,9 @@
 <template>
     <br><br>
+    <div>
+        <h1>Bouquets</h1>
+        <p>N'hésitez pas à appeler pour prendre connaissance des disponibilités et réserver votre bouquet. </p>
+    </div>
     <div class="container">
         <div class="row">
                 <div v-for="(bouquet, bouquetIndex) in this.bouquets" :key="bouquetIndex" class="card" >

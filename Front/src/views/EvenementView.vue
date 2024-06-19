@@ -1,59 +1,25 @@
 <template>
-    <!-- Page Content  -->
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info" @click="toggleSidebar">
-                    <i class="fas fa-align-left"></i>
-                    <span>Choisir un evenement</span>
-                </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-align-justify"></i>
-                </button>
-
-
-            </div>
-        </nav>
-    </div>
-    <div class="rows">
-        <div class="wrapper">
-            <!-- Sidebar  -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>Evenements</h3>
-                    <div v-for="(evenement, evenementIndex) in evenements" :key="evenementIndex">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ evenement.nom_evenement }}</h5>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+    <div>
+        <div v-for="evenement in evenements" :key="evenement.id_evenement">
+            <h2>{{ evenement.nom_evenement }}</h2>
+            <carousel v-if="evenementPhotos(evenement.id_evenement).length > 0" :items-to-show="3" :wrap-around="true"
+                :navigation-enabled="true">
+                <slide v-for="photo in evenementPhotos(evenement.id_evenement)" :key="photo.id">
+                    <img :src="photo.url" alt="Photo de l'événement" />
+                </slide>
+            </carousel>
         </div>
-        <div class="carousel">
-            <Carousel id="gallery" :items-to-show="1" :wrap-around="false" v-model="currentSlide">
-                <Slide v-for="slide in 10" :key="slide">
-                    <div class="carousel__item">{{ slide }}</div>
-                </Slide>
-            </Carousel>
 
-            <Carousel id="thumbnails" :items-to-show="4" :wrap-around="true" v-model="currentSlide" ref="carousel">
-                <Slide v-for="slide in 10" :key="slide">
-                    <div class="carousel__item" @click="slideTo(slide - 1)">{{ slide }}</div>
-                </Slide>
-            </Carousel>
-        </div>
     </div>
-
-
 </template>
+
+
+
 <script>
 
 import { mapState } from 'vuex';
-import { Carousel, Slide } from 'vue3-carousel'
 import { getAllEvenement, getAllPhoto } from '@/services/evenement.services';
+import { Carousel, Slide } from 'vue3-carousel';
 
 import 'vue3-carousel/dist/carousel.css'
 
@@ -71,7 +37,23 @@ export default {
     data() {
         return {
             evenements: [],
-            photos: [],
+            photos: [
+                {
+                    id: 1,
+                    id_evenement: 1,
+                    url: 'https://via.placeholder.com/300x200?text=Photo+1',
+                },
+                {
+                    id: 2,
+                    id_evenement: 1,
+                    url: 'https://via.placeholder.com/300x200?text=Photo+2',
+                },
+                {
+                    id: 3,
+                    id_evenement: 5,
+                    url: 'https://via.placeholder.com/300x200?text=Photo+3',
+                },
+            ],
             currentSlide: 0,
         }
     },
@@ -89,13 +71,12 @@ export default {
         async getPhoto() {
             return await getAllPhoto();
         },
-        slideTo(val) {
-            this.currentSlide = val
+        evenementPhotos(id_evenement) {
+            console.log("id_event",id_evenement,this.photos.filter(photo => photo.id_evenement === id_evenement));
+            return this.photos.filter(photo => photo.id_evenement === id_evenement);
         },
-        toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-    }
+    },
+
 }
 </script>
 <style scoped>
@@ -200,9 +181,11 @@ body {
     #sidebar {
         margin-left: -250px;
     }
+
     #sidebar.active {
         margin-left: 0;
     }
+
     #sidebarCollapse span {
         display: none;
     }

@@ -14,9 +14,9 @@
 
     data() {
       return {
-        name: 'Mon entreprise',
-        address: '123 rue des Roses, 75000 Paris',
-        phoneNumber: '+33 1 23 45 67 89'
+        name: 'Histoire de coeur',
+        address: '24 rue de la République, 69680 Chassieu',
+        phoneNumber: '+33 4 78 90 74 10'
       };
     }
   };

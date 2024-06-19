@@ -15,7 +15,7 @@ exports.createBouquet = (req,res) => {
     let nom_bouquet = req.body.nom_bouquet;
     let prix_bouquet = req.body.prix_bouquet;
     let description = req.body.description;
-    let image_bouquet = req.body.image_bouquet;
+    let image_bouquet = req.file;
     bouquetService.createBouquet(nom_bouquet,prix_bouquet,description,image_bouquet,(error, data) => {
         if(error){
             return res.status(500).send("error");
@@ -29,7 +29,8 @@ exports.updateBouquet = (req,res) => {
     let nom_bouquet = req.body.nom_bouquet;
     let prix_bouquet = req.body.prix_bouquet;
     let description = req.body.description;
-    bouquetService.updateBouquet(id_bouquet,nom_bouquet,prix_bouquet,description,(error,data) => {
+    let image_bouquet = req.file;
+    bouquetService.updateBouquet(id_bouquet,nom_bouquet,prix_bouquet,description,image_bouquet,(error,data) => {
         if(error){
             return res.status(500).send("error");
         }

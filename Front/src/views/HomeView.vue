@@ -3,35 +3,45 @@
     <div class="image-logo"> 
       <div class="container">
         <div class="element_photo">
-          <img class="photo" src="../assets/logo.png" alt="photo">
+          <img class="photo" src="../assets/fleuriste.webp" alt="photo">
           <p class="boxtext">
             <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Nulla mattis ligula in diam porttitor efficitur. Proin
-               sagittis, velit ut dictum auctor, est urna viverra dui, in
-                varius mi elit vel lorem. Cras laoreet mattis diam sed 
-                feugiat. Nunc egestas nulla nisl. Donec tempus mi at vulputate
-                 sagittis. Curabitur vehicula orci mi, ut elementum orci faucibus 
-                 eu. Ut tempus pretium nisl vel consectetur. Sed porta quam lacus, 
-                 nec elementum urna fermentum nec. Morbi commodo et est in vulputate. 
-                 Cras enim mi, mollis hendrerit pharetra et, imperdiet et mi. Mauris 
-                 ac sapien posuere, consectetur purus et, sodales leo. Nunc a eros nibh.
-                  Integer ac quam mi. Donec vulputate scelerisque leo, at tempus neque 
-                  auctor non. Cras vitae justo vulputate enim varius fringilla. Nunc 
-                  luctus purus magna, in ultricies est semper id. 
+              Bienvenue chez "Histoire de Cœur", votre fleuriste de confiance au cœur de la ville. Notre passion 
+              pour les fleurs et le désir de partager leur beauté nous ont conduits à créer cette boutique, véritable 
+              havre de paix et de couleurs.
+              <br><br>
+              Chez "Histoire de Cœur", nous sommes fiers de proposer une large sélection de fleurs fraîches, 
+              soigneusement choisies auprès de producteurs locaux et respectueux de l'environnement. Que vous 
+              recherchiez des roses romantiques, des lys élégants, des orchidées exotiques ou des tournesols joyeux, 
+              nous avons ce qu'il vous faut.
+              <br><br>
+              Notre équipe de fleuristes professionnels est toujours prête à vous aider à créer des bouquets personnalisés 
+              pour toutes les occasions. Que ce soit pour un anniversaire, un mariage, une naissance ou simplement pour 
+              faire plaisir, nous mettons notre créativité et notre savoir-faire à votre service pour créer des compositions 
+              florales uniques et éblouissantes.
+              <br><br>
+              En plus de notre sélection de fleurs, nous sommes heureux de vous accueillir dans notre salon de thé au milieu 
+              des fleurs. Installez-vous confortablement et dégustez une tasse de thé ou de café accompagnée d'une pâtisserie 
+              maison, tout en profitant de la vue sur nos magnifiques compositions florales. Notre salon de thé est l'endroit 
+              idéal pour se détendre, se retrouver entre amis ou simplement profiter d'un moment de calme au milieu des fleurs.
+              <br><br>
+              Chez "Histoire de Cœur", nous croyons au pouvoir des fleurs pour raconter des histoires d'amour, exprimer des 
+              sentiments profonds et embellir les moments importants de la vie. Nous sommes impatients de vous accueillir dans 
+              notre boutique et de partager notre amour des fleurs avec vous, tout en savourant une délicieuse tasse de thé.
             </span>
           </p>
         </div>  
       </div> 
     </div>
     <div class="container">
+      <h2>Découvrir nos produits</h2>
         <div class="row">
             <div class="col-md-3" v-for="(button, index) in buttons" :key="index">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ button.title }}</h5>
+                    <div class="card-body">  
                         <a href="#" class="btn btn-primary" @click="navigateTo(button.route)">
                             <i :class="button.icon"></i>
+                            <h5 class="card-title">{{ button.title }}</h5>
                         </a>
                     </div>
                 </div>
@@ -42,7 +52,7 @@
 </template>
 
 <script>
-
+import 'font-awesome/css/font-awesome.min.css';
 
 export default {
   name: 'HomeView',
@@ -98,7 +108,7 @@ export default {
 
 
 .image-logo{
-  background-image: url(../assets/fond_opa.jpeg);
+  background-image: url(../assets/boutique.jpeg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -123,5 +133,14 @@ export default {
   max-width: 1600px;
   margin: 0 auto;
   padding: 100px 20px 0;
+  height: 95vh;
+}
+.row {
+  padding-top: 15%;
+}
+
+h2 {
+  font-size: 40px;
+  padding-bottom: 5%;
 }
 </style>

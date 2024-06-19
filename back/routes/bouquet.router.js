@@ -1,6 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const bouquetController = require('../controllers/bouquet.controller')
+const upload = require("../middleware/multer.middleware").upload;
 
 router.use((req, res, next) => {
     console.log(`Requête reçue sur le routeur : ${req.originalUrl}`);
@@ -74,7 +75,7 @@ router.get("/getAllBouquet", bouquetController.getAllBouquet);
  *       500:
  *         description: Internal error
  */
-router.post("/createBouquet", bouquetController.createBouquet);
+router.post("/createBouquet",upload.single('image'), bouquetController.createBouquet);
 
 /**
  * @swagger

@@ -6,10 +6,17 @@
           <img src="../assets/the.jpg" alt="image 2" class="img2">
         </div>
       </div>
-      <div class="box">
+      <div class="box desc">
         <div class="description">
-          <p>Lorem ipsum dolor sit amet</p>
-          <p>Lorem ipsum dolor sit amet</p>
+          <p>Bienvenue dans notre salon de thé chaleureux et accueillant, où vous pourrez déguster 
+            une grande variété de boissons chaudes et fraîches, à l'intérieur ou en extérieur selon 
+            vos préférences. Nous proposons une sélection de thés, cafés et chocolats chauds de qualité 
+            supérieure, ainsi que des jus de fruits frais, des smoothies et des limonades maison pour 
+            vous rafraîchir. Notre salon de thé est l'endroit idéal pour se détendre et se ressourcer, 
+            seul ou en compagnie, dans une ambiance conviviale et détendue. Nous avons également une 
+            sélection de pâtisseries et de snacks faits maison pour accompagner vos boissons. Nous 
+            sommes impatients de vous accueillir et de vous faire découvrir notre sélection de boissons 
+            et de mets délicieux.</p>
         </div>
       </div>
     </div>
@@ -20,7 +27,7 @@
             <span>{{ type.nom_type_article }} </span>
             <hr>
             <div v-for="(article) in filteredCarte(type)" v-bind:key="article.id_article">
-              <div class="row">
+              <div class="row_art">
                 <div class="article">
                   <p>{{ article.nom_article }}</p>
                   <p>{{ article.prix_article }}</p>
@@ -29,11 +36,6 @@
             </div>
             <hr>
           </template>
-        </div>
-      </div>
-      <div class="box">
-        <div class="img">
-          <img src="../assets/fond.jpeg" alt="image_fond">
         </div>
       </div>
     </div>
@@ -83,18 +85,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    background-image: url(../assets/the.jpg);
   }
   
   .box {
     flex: 1 1 25%;
     height: 45vh;
-    background-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(89,89,97,1) 50%);
-    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
   
     backdrop-filter: blur(15px);
+  }
+  .box .desc {
+    background-image: url(../assets/the.jpg);
+    margin-left:0px; 
   }
   
   .img {
@@ -107,6 +112,7 @@
     padding: 20px;
     background-color: rgb(248, 243, 243);
     width: 450px;
+    
   }
   
   .carte {
@@ -114,6 +120,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: antiquewhite;
   }
   
   .carte span {
