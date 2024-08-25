@@ -1,5 +1,4 @@
 <template>
-    <hr>
     <div class="col-md-12">
         <div class="card card-container">
             <img
@@ -7,7 +6,6 @@
                 src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                 class="profile-img-card"
                 />
-                <hr>
             <Form @submit="handleLogin" :validation-schema="schema">
                 <div class="form-group">
                     <label for="username">Nom d'utilisateur</label>
@@ -101,12 +99,17 @@ export default {
 <style scoped>
 
 .col-md-12 {
+    padding-top: 25px;
     display: flex;
     justify-content: center;
+    height: 70vh;
 }
 
 img {
     border-radius: 50%;
+}
+.card{
+    border: 0px;
 }
 
 </style>

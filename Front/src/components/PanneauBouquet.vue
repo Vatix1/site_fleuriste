@@ -31,7 +31,7 @@
                         <input type="file" class="form-control-file" id="newBouquetImage" ref="newBouquetImage">
                     </div>
                     </form>
-                    <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription,newBouquetImage)">Ajouter</button>
+                    <button type="submit" class="btn btn-primary" @click="createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription)">Ajouter</button>
                 </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
         newBouquetName: '',
         newBouquetPrix: 0,
         newBouquetDescription:"",
-        newBouquetImage: "",
+        newBouquetImage: null,
       };
     },
     async mounted() {
@@ -92,6 +92,7 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
         toggleAddBouquet() {
             this.showAddBouquet = !this.showAddBouquet;
         },
+        /*
         async createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription = ''){
             console.log('bouquet',this.$refs.newBouquetImage.files[0]);
             const data = {
@@ -102,6 +103,20 @@ import { deleteBouquet, createBouquet, updateBouquet, getAllBouquet } from "../s
             }
             console.log("bouquet", data);
             await createBouquet(data);
+            location.reload();
+        },
+        */
+        async createNewBouquet(newBouquetName,newBouquetPrix,newBouquetDescription) {
+            const file = this.$refs.newBouquetImage.files[0];
+            console.log("file",file);
+            const formData = new FormData();
+            formData.append('nom_bouquet', newBouquetName);
+            formData.append('prix_bouquet', newBouquetPrix);
+            formData.append('description', newBouquetDescription);
+            formData.append('image_bouquet',file);
+
+            console.log("data", formData);
+            await createBouquet(formData);
             location.reload();
         },
         async updateBouquet(id, nom, prix, description) {

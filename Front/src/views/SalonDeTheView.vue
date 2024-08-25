@@ -2,8 +2,8 @@
     <div class="row">
       <div class="box">
         <div class="img">
-          <img src="../assets/fond_opa.jpeg" alt="image 1" class="img1">
-          <img src="../assets/the.jpg" alt="image 2" class="img2">
+          <img src="../assets/boutique.jpeg" alt="image 1" class="img1">
+          <img src="../assets/sdt_interieur.jpeg" alt="image 2" class="img2">
         </div>
       </div>
       <div class="box desc">
@@ -16,7 +16,7 @@
             seul ou en compagnie, dans une ambiance conviviale et détendue. Nous avons également une 
             sélection de pâtisseries et de snacks faits maison pour accompagner vos boissons. Nous 
             sommes impatients de vous accueillir et de vous faire découvrir notre sélection de boissons 
-            et de mets délicieux.</p>
+            et de mets délicieux. Mais n'oubliez pas de réserver !</p>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    background-image: url(../assets/the.jpg);
+    background-image: url(../assets/bois.jpg);
   }
   
   .box {
@@ -112,6 +112,7 @@
     padding: 20px;
     background-color: rgb(248, 243, 243);
     width: 450px;
+    border-radius: 10px;
     
   }
   
@@ -121,6 +122,7 @@
     flex-direction: column;
     align-items: flex-start;
     background-color: antiquewhite;
+    border-radius: 10px;
   }
   
   .carte span {

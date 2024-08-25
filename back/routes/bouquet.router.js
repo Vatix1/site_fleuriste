@@ -75,7 +75,7 @@ router.get("/getAllBouquet", bouquetController.getAllBouquet);
  *       500:
  *         description: Internal error
  */
-router.post("/createBouquet",upload.single('image'), bouquetController.createBouquet);
+router.post("/createBouquet",upload.single('image_bouquet'), bouquetController.createBouquet);
 
 /**
  * @swagger

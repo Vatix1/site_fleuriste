@@ -76,6 +76,7 @@ export default {
 
 
     cursor: pointer;
+    border: 5px solid #FFFFFF;
 
     -webkit-box-shadow: 0 0 5px #000;
         box-shadow: 0 0 5px #000;

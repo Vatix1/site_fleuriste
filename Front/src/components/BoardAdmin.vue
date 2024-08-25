@@ -40,3 +40,8 @@ export default {
 };
 
 </script>
+<style scoped>
+.row {
+  padding-left: 15px;
+}
+</style>

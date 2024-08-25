@@ -3,7 +3,7 @@
 		<div class="nav-left">
 			<div>
 				<img class="logo" src="../assets/histoiredecoeurlogo.jpg" alt="logo fleuriste"
-					style="width: 40px; border-radius: 50%;" @click="showAcceuil()">
+					style="width: 60px; border-radius: 50%;" @click="showAcceuil()">
 			</div>
 		</div>
 		<div class="nav-center">
@@ -15,9 +15,9 @@
       <button class="login" @click="showLogin()">Connexion</button>
     </div> -->
 		<div class="nav-right">
-			<button v-if="!isLoggedIn" @click="showLogin">Connexion</button>
-			<button v-else @click="logout">Déconnexion</button>
-			<button v-if="isLoggedIn" @click="showProfile">Profil</button>
+			<button v-if="!isLoggedIn" @click="showLogin" class="nav-button">Connexion</button>
+			<button v-else @click="logout" class="nav-button">Déconnexion</button>
+			<button v-if="isLoggedIn" @click="showProfile" class="nav-button">Profil</button>
 		</div>
 
 
@@ -136,7 +136,8 @@ body {
 .navbar {
 	border: 0;
 	border-radius: 0;
-	background: linear-gradient(to right, #837c7c, #f3e4eb);
+	background: linear-gradient(to right, #837c7c, #c5c4c5);
+	height: 80px;
 
 	.nav li>a,
 	.navbar-brand {
@@ -213,15 +214,16 @@ body {
 .nav-center {
 	display: flex;
 	align-items: center;
-	width: 60%;
+	width: 65%;
 	justify-content: end;
 }
 
 .nav-button {
-	font-size: 20px;
+	font-size: 25px;
 	width: fit-content;
 	padding-left: 15px;
 	padding-right: 15px;
+	margin: 10px;
 	height: 100%;
 	border: none;
 	background: none;
